@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/security 
+            http://www.springframework.org/schema/security/spring-security.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+    <http pattern="/**" authentication-manager-ref="authenticationManager" >
+<!--    <intercept-url pattern="project/**" access="ROLE_USER" />
+        <intercept-url pattern="project/alternatives/" method="POST" access="ROLE_PROJECT_MANAGER" />
+        <intercept-url pattern="project/criterias" method="POST" access="ROLE_PROJECT_MANAGER" /> -->
+        
+        <intercept-url pattern="/" access="permitAll" />
+        <intercept-url pattern="/test/**" access="permitAll" />
+        
+        <intercept-url pattern="/login" access="isAnonymous()" />
+        <intercept-url pattern="/register" access="isAnonymous()" />
+        <intercept-url pattern="/logout" access="isAuthenticated()" />
+        
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        
+        <form-login login-page="/login" 
+            default-target-url="/"
+            authentication-failure-url="/login?error"
+            authentication-success-handler-ref="simpleAuthenticationHandler"
+            password-parameter="password" username-parameter="login" />
+            
+        <logout logout-url="/logout" logout-success-url="/?logout" />
+        
+        <access-denied-handler error-page="/?accessDenied" />
+        
+        <csrf disabled="true" />
+        
+    </http>
+
+    <b:bean id="simpleAuthenticationHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+        <b:constructor-arg value="/?loginsuccess" />
+    </b:bean>
+    <b:bean id="userDetailsService" class="com.hnyp.ahp.web.spring.CustomUserDetailsService" />
+
+    <authentication-manager id="authenticationManager" alias="authenticationManager">
+        <authentication-provider user-service-ref="userDetailsService" />
+    </authentication-manager>
+
+</b:beans>

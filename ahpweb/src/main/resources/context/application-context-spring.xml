@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd
+         http://www.springframework.org/schema/util
+         http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+    <context:property-placeholder location="classpath:db.properties" />
+ 
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+      <property name="dataSource" ref="dataSource" />
+      <property name="packagesToScan" value="com.hnyp.ahp.web.v2.models" />
+      <property name="hibernateProperties">
+         <props>
+            <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+         </props>
+      </property>
+    </bean>
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+      <property name="driverClassName" value="${jdbc.driverClassName}" />
+      <property name="url" value="${jdbc.url}" />
+      <property name="username" value="${jdbc.user}" />
+      <property name="password" value="${jdbc.pass}" />
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    
+    <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="persistenceExceptionTranslationPostProcessor"
+        class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+    <!-- services -->
+
+    <bean id="userService" class="com.hnyp.ahp.web.services.impl.DefaultUserService" />
+    <bean id="roleService" class="com.hnyp.ahp.web.services.impl.DefaultRoleService" />
+    <bean id="projectService" class="com.hnyp.ahp.web.services.impl.DefaultProjectService" />
+    
+    <bean id="sessionService" class="com.hnyp.ahp.web.services.impl.DefaultSessionService">
+        <aop:scoped-proxy />
+    </bean>
+    
+    <!--  
+    <bean id="criteriaComparisonService" class="com.hnyp.ahp.web.services.impl.DefaultCriteriaComparisonService" />
+    <bean id="criteriaComparisonVersionService" class="com.hnyp.ahp.web.services.impl.DefaultCriteriaComparisonVersionService" />
+    <bean id="criteriaService" class="com.hnyp.ahp.web.services.impl.DefaultCriteriaService" />
+    <bean id="projectService" class="com.hnyp.ahp.web.services.impl.DefaultProjectService" />
+    -->
+    
+    <!-- facades -->
+    
+    <bean id="accountFacade" class="com.hnyp.ahp.web.facades.impl.DefaultAccountFacade" />
+    <bean id="projectsFacade" class="com.hnyp.ahp.web.facades.impl.DefaultProjectsFacade" />
+    
+    <!-- converters and populators -->
+    
+    <bean id="abstractConverter" class="com.hnyp.ahp.web.data.populators.AbstractConverter" abstract="true" />
+    
+    <bean id="projectDataBasicPopulator" class="com.hnyp.ahp.web.data.populators.ProjectDataBasicPopulator" />
+    <bean id="projectDataDecisionsPopulator" class="com.hnyp.ahp.web.data.populators.ProjectDataDecisionsPopulator" />
+    
+    <bean id="basicProjectDataConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.web.data.ProjectData" />
+        <property name="populators">
+            <list>
+                <ref bean="projectDataBasicPopulator" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="detailsProjectDataConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.web.data.ProjectData" />
+        <property name="populators">
+            <list>
+                <ref bean="projectDataBasicPopulator" />
+                <ref bean="projectDataDecisionsPopulator" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="basicProjectDataDecisionsConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.web.data.ProjectDecisionData" />
+        <property name="populators">
+            <list>
+                <bean class="com.hnyp.ahp.web.data.populators.ProjectDecisionBasicPopulator" />
+            </list>
+        </property>
+    </bean>
+
+</beans>

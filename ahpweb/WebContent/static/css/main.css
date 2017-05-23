@@ -1,0 +1,15 @@
+/* body {
+    background-color: gray;
+} */
+
+.m-lr-20 {
+    margin: 0 20px;
+}
+
+.container {
+    background-color: white;
+}
+
+.form-group .error {
+    margin-top: 10px;
+}
