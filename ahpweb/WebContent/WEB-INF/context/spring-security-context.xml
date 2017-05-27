@@ -13,6 +13,8 @@
 
     <context:annotation-config />
 
+    <http pattern="/static/**" security="none" />
+
     <http pattern="/**" authentication-manager-ref="authenticationManager" >
 <!--    <intercept-url pattern="project/**" access="ROLE_USER" />
         <intercept-url pattern="project/alternatives/" method="POST" access="ROLE_PROJECT_MANAGER" />
