@@ -5,8 +5,8 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hnyp.ahp.web.data.CriteriaComparisonTableData;
-import com.hnyp.ahp.web.facades.ProjectDecisionFacade;
+import com.hnyp.ahp.core.data.CriteriaComparisonTableData;
+import com.hnyp.ahp.core.facades.ProjectDecisionFacade;
 
 @RestController
 public class ProjectDecisionRestController {

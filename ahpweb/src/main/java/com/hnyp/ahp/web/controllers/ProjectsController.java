@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hnyp.ahp.web.facades.ProjectsFacade;
+import com.hnyp.ahp.core.data.ProjectData;
+import com.hnyp.ahp.core.facades.ProjectsFacade;
 import com.hnyp.ahp.web.forms.ProjectForm;
 
 @Controller
@@ -51,10 +52,17 @@ public class ProjectsController {
             return "redirect:" + "/projects/create";
         }
         
-        projectsFacade.createProject(projectForm);
+        projectsFacade.createProject(toProjectData(projectForm));
         redirectAttributes.addAttribute("createdProjectName", projectForm.getName());
         
         return "redirect:" + "/projects";
+    }
+    
+    private ProjectData toProjectData(ProjectForm form) {
+        ProjectData data = new ProjectData();
+        data.setDescription(form.getDescription());
+        data.setName(form.getName());
+        return data;
     }
     
 }

@@ -16,7 +16,7 @@ import com.hnyp.ahp.web.v2.models.Project;
 import com.hnyp.ahp.web.v2.models.ProjectDecision;
 import com.hnyp.ahp.web.v2.models.User;
 
-@Controller
+//@Controller
 @RequestMapping("/test")
 public class TestComtroller {
 

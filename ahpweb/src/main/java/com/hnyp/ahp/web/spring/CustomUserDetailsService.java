@@ -13,9 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.hnyp.ahp.web.services.UserService;
-import com.hnyp.ahp.web.v2.models.Role;
-import com.hnyp.ahp.web.v2.models.User;
+import com.hnyp.ahp.core.models.Role;
+import com.hnyp.ahp.core.models.User;
+import com.hnyp.ahp.core.services.UserService;
 
 public class CustomUserDetailsService implements UserDetailsService  {
 

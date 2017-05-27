@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hnyp.ahp.web.services.UserService;
-import com.hnyp.ahp.web.v2.models.User;
+import com.hnyp.ahp.core.models.User;
+import com.hnyp.ahp.core.services.UserService;
 
 public class LoadSessionUserInterceptor implements HandlerInterceptor {
 

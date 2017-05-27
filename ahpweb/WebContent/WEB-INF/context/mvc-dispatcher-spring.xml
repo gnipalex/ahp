@@ -42,7 +42,7 @@
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="locale" />
         </bean>
-        <!-- <bean class="com.hnyp.ahp.web.interceptors.LoadSessionUserInterceptor" /> -->
+        <bean class="com.hnyp.ahp.web.interceptors.LoadSessionUserInterceptor" />
     </mvc:interceptors>
     
 </beans>

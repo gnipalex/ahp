@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hnyp.ahp.core.data.CriteriaComparisonsData;
+import com.hnyp.ahp.core.models.CriteriaComparison;
+import com.hnyp.ahp.core.models.CriteriaComparisonVersion;
+import com.hnyp.ahp.core.services.CriteriaComparisonService;
+import com.hnyp.ahp.core.services.CriteriaComparisonVersionService;
+import com.hnyp.ahp.core.services.CriteriaService;
+import com.hnyp.ahp.core.services.ProjectService;
 import com.hnyp.ahp.lib.Comparison;
 import com.hnyp.ahp.lib.ComparisonMatrix;
 import com.hnyp.ahp.lib.PriorityMatrix;
-import com.hnyp.ahp.web.data.CriteriaComparisonsData;
-import com.hnyp.ahp.web.models.CriteriaComparison;
-import com.hnyp.ahp.web.models.CriteriaComparisonVersion;
-import com.hnyp.ahp.web.services.CriteriaComparisonService;
-import com.hnyp.ahp.web.services.CriteriaComparisonVersionService;
-import com.hnyp.ahp.web.services.CriteriaService;
-import com.hnyp.ahp.web.services.ProjectService;
 import com.hnyp.ahp.web.v2.models.Criteria;
 import com.hnyp.ahp.web.v2.models.Project;
 

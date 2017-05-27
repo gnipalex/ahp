@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hnyp.ahp.web.facades.AccountFacade;
+import com.hnyp.ahp.core.data.RegisterData;
+import com.hnyp.ahp.core.facades.AccountFacade;
 import com.hnyp.ahp.web.forms.RegisterForm;
 
 @Controller
@@ -46,10 +47,19 @@ public class RegisterController {
             return "redirect:" + "/register";
         }
         
-        accountFacade.register(registerForm);
+        accountFacade.register(toRegisterData(registerForm));
         redirectAttributes.addAttribute(ControllerConstants.ACCOUNT_REGISTERED, true);
         
         return "redirect:" + "/login";
+    }
+    
+    private RegisterData toRegisterData(RegisterForm form) {
+        RegisterData data = new RegisterData();
+        data.setEmail(form.getEmail());
+        data.setFirstName(form.getFirstName());
+        data.setLastName(form.getLastName());
+        data.setPassword(form.getPassword());
+        return data;
     }
     
 }
