@@ -34,10 +34,10 @@ public class ProjectDecision {
     private List<Criteria> criterias;
     
     @OneToMany
-    private List<CriteriaComparisonResult> criteriaComparisonResults;
+    private List<CriteriaComparisonTable> criteriaComparisonResults;
     
     @OneToMany
-    private List<AlternativeComparisonResult> alternativeComparisonResults;
+    private List<AlternativeComparisonTable> alternativeComparisonResults;
     
     @Column
     private String goal;
@@ -73,19 +73,19 @@ public class ProjectDecision {
         this.criterias = criterias;
     }
 
-    public List<CriteriaComparisonResult> getCriteriaComparisonResults() {
+    public List<CriteriaComparisonTable> getCriteriaComparisonResults() {
         return criteriaComparisonResults;
     }
 
-    public void setCriteriaComparisonResults(List<CriteriaComparisonResult> criteriaComparisonResults) {
+    public void setCriteriaComparisonResults(List<CriteriaComparisonTable> criteriaComparisonResults) {
         this.criteriaComparisonResults = criteriaComparisonResults;
     }
 
-    public List<AlternativeComparisonResult> getAlternativeComparisonResults() {
+    public List<AlternativeComparisonTable> getAlternativeComparisonResults() {
         return alternativeComparisonResults;
     }
 
-    public void setAlternativeComparisonResults(List<AlternativeComparisonResult> alternativeComparisonResults) {
+    public void setAlternativeComparisonResults(List<AlternativeComparisonTable> alternativeComparisonResults) {
         this.alternativeComparisonResults = alternativeComparisonResults;
     }
 

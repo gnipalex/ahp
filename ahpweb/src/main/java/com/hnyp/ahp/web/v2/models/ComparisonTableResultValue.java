@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
-public abstract class ComparisonResultRow {
+public abstract class ComparisonTableResultValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +23,8 @@ public abstract class ComparisonResultRow {
     private long id;
     
     @ManyToOne
-    @JoinColumn(name="comparisonResult_id", referencedColumnName="id", nullable=false)
-    private ComparisonResult comparisonResult;
+    @JoinColumn(name="comparisonTable_id", referencedColumnName="id", nullable=false)
+    private ComparisonTable comparisonTable;
     
     @ManyToOne
     @JoinColumn(name="comparableItem_id", nullable=false)
@@ -33,12 +33,12 @@ public abstract class ComparisonResultRow {
     @Column
     private double value;
 
-    public ComparisonResult getComparisonResult() {
-        return comparisonResult;
+    public ComparisonTable getComparisonTable() {
+        return comparisonTable;
     }
 
-    public void setComparisonResult(ComparisonResult comparisonResult) {
-        this.comparisonResult = comparisonResult;
+    public void setComparisonTable(ComparisonTable comparisonTable) {
+        this.comparisonTable = comparisonTable;
     }
 
     public ComparableItem getComparableItem() {

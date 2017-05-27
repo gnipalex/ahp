@@ -17,11 +17,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
-public class ComparisonResult {
+public class ComparisonTable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,16 +30,16 @@ public class ComparisonResult {
     private long id;
     
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="comparisonResult_comparableItem", 
-        joinColumns = { @JoinColumn(name="comparisonResult_id", nullable=false, updatable=false) },
+    @JoinTable(name="comparisonTable_comparableItem", 
+        joinColumns = { @JoinColumn(name="comparisonTable_id", nullable=false, updatable=false) },
         inverseJoinColumns = { @JoinColumn(name="comparableItem_id", nullable=false, updatable=false) })
     private List<ComparableItem> comparables;
     
-    @OneToMany(mappedBy="comparisonResult", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="comparisonTable", cascade = CascadeType.ALL)
     private List<ComparisonPair> comparisonPairs;
     
-    @OneToMany(mappedBy = "comparisonResult", cascade = CascadeType.ALL)
-    private List<ComparisonResultRow> comparisonResults;
+    @OneToMany(mappedBy = "comparisonTable", cascade = CascadeType.ALL)
+    private List<ComparisonTableResultValue> comparisonResults;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="projectDecision_id", referencedColumnName="id", nullable=false)
@@ -85,11 +86,11 @@ public class ComparisonResult {
         this.finished = finished;
     }
 
-    public List<ComparisonResultRow> getComparisonResults() {
+    public List<ComparisonTableResultValue> getComparisonResults() {
         return comparisonResults;
     }
 
-    public void setComparisonResults(List<ComparisonResultRow> comparisonResults) {
+    public void setComparisonResults(List<ComparisonTableResultValue> comparisonResults) {
         this.comparisonResults = comparisonResults;
     }
 

@@ -17,7 +17,7 @@ import com.hnyp.ahp.lib.ComparisonScale;
 
 @Entity
 @Table(name = "comparisonPair", 
-        uniqueConstraints = { @UniqueConstraint( columnNames= {"comparisonResult_id", "itemA_id", "itemB_id"}) })
+        uniqueConstraints = { @UniqueConstraint( columnNames= {"comparisonTable_id", "itemA_id", "itemB_id"}) })
 public class ComparisonPair {
 
     @Id
@@ -26,8 +26,8 @@ public class ComparisonPair {
     private long id;
     
     @ManyToOne
-    @JoinColumn(name="comparisonResult_id", referencedColumnName="id", nullable=false)
-    private ComparisonResult comparisonResult;
+    @JoinColumn(name="comparisonTable_id", referencedColumnName="id", nullable=false)
+    private ComparisonTable comparisonTable;
     
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="itemA_id", referencedColumnName="id", nullable=false)
@@ -41,12 +41,12 @@ public class ComparisonPair {
     @Enumerated(EnumType.STRING)
     private ComparisonScale value;
 
-    public ComparisonResult getComparisonResult() {
-        return comparisonResult;
+    public ComparisonTable getComparisonTable() {
+        return comparisonTable;
     }
 
-    public void setComparisonResult(ComparisonResult comparisonResult) {
-        this.comparisonResult = comparisonResult;
+    public void setComparisonTable(ComparisonTable comparisonTable) {
+        this.comparisonTable = comparisonTable;
     }
 
     public ComparableItem getItemA() {

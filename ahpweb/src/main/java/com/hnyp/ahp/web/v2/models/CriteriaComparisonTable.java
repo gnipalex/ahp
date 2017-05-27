@@ -8,8 +8,8 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @DiscriminatorValue(value = "criteria")
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames={"name", "projectDecision_id"}) })
-public class CriteriaComparisonResult extends ComparisonResult {
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames={"name", "projectDecision_id"}) })
+public class CriteriaComparisonTable extends ComparisonTable {
 
     @Column(nullable=false)
     private String name;

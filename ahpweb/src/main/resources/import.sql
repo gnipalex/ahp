@@ -1,3 +1,15 @@
+
+-- add unique constraint for AlternativeComparisonTable entity
+
+ALTER TABLE ComparisonTable ADD CONSTRAINT UC_voter_criteria_decision UNIQUE (voter_id, criteria_id, projectDecision_id);
+
+-- add unique constraint for AlternativeComparisonTable entity
+
+ALTER TABLE ComparisonTable ADD CONSTRAINT UC_name_decision UNIQUE (name, projectDecision_id);
+
+
+-- sample data
+
 insert into role(name) values('ROLE_USER');
 
 insert into user(id,firstName, lastName, email, password) value (1, 'Test', 'User', 'test@email.com', '123123');
@@ -18,3 +30,19 @@ insert into comparableitem (id,name, description, type, projectDecision_id) valu
 
 insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (1, 'test@email.com', '1234#gdgdg#89121', 1, 1, 'CONFIRMED');
 insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (2, 'test2@email.com', 'uuu1234#gdgdg#89121', 1, null, 'CREATED');
+
+insert into comparisontable (id, type, name, description, projectDecision_id) value (1, 'criteria', 'Child', 'How little child treats priorities', 1);
+--insert into comparisontable (id, type, name, description, projectDecision_id) value (2, 'criteria', 'Mother', 'How mother treats priorities', 1);
+
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (1, 'EQUAL', 1, 3, 3);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (2, 'SLIGHTLY_CONCEDE', 1, 3, 4);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (3, 'EQUAL', 1, 3, 5);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (4, 'SLIGHTLY_FAVORS', 1, 4, 3);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (5, 'EQUAL', 1, 4, 4);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (6, 'EXTREME_FAVORS', 1, 4, 5);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (7, 'EQUAL', 1, 5, 3);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (8, 'EXTREME_CONCEDE', 1, 5, 4);
+insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (9, 'EQUAL', 1, 5, 5);
+
+
+

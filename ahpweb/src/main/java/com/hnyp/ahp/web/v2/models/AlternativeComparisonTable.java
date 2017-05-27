@@ -9,15 +9,15 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @DiscriminatorValue(value = "alternative")
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "voter_id", "criteria_id", "projectDecision_id" }) } )
-public class AlternativeComparisonResult extends ComparisonResult {
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "voter_id", "criteria_id", "projectDecision_id" }) } )
+public class AlternativeComparisonTable extends ComparisonTable {
     
     @ManyToOne
-    @JoinColumn(name="voter_id", referencedColumnName="id", nullable=false)
+    @JoinColumn(name="voter_id", referencedColumnName="id")
     private User voter;
     
     @ManyToOne
-    @JoinColumn(name="criteria_id", referencedColumnName="id", nullable=false)
+    @JoinColumn(name="criteria_id", referencedColumnName="id")
     private Criteria criteria;
 
     public User getVoter() {

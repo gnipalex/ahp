@@ -1,6 +1,6 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="projects" tagdir="/WEB-INF/tags/projects" %>
 <common:pageTemplate title="Projects">
 
     <div class="page-header">
@@ -13,15 +13,7 @@
         </div>
         <c:if test="${ not empty projects}">
             <c:forEach var="project" items="${projects}">
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">${project.name}</div>
-                        <div class="panel-body">
-                            <p>${project.description}</p>
-                            <p><a href="${ctx}/projects/details/${project.id}" class="pull-right">See details</a></p>
-                        </div>
-                    </div>
-                </div>
+                <projects:project project="${project}"/>
             </c:forEach>
         </c:if>
         <div class="col-xs-12">

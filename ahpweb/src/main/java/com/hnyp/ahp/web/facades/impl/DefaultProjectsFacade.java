@@ -38,7 +38,8 @@ public class DefaultProjectsFacade implements ProjectsFacade {
         User currentUser = userService.getCurrentUser();
         List<Project> userProjects = currentUser.getProjects();
         if (CollectionUtils.isNotEmpty(userProjects)) {
-            return userProjects.stream().map(basicProjectDataConverter::convert)
+//            return userProjects.stream().map(basicProjectDataConverter::convert)
+            return userProjects.stream().map(detailsProjectDataConverter::convert)
                     .collect(Collectors.toList());
         }
         return Collections.emptyList();
