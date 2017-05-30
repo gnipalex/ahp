@@ -2,34 +2,51 @@ package com.hnyp.ahp.core.models;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+
+/**
+ * Stores alternative comparisons performed for user and criteria
+ *
+ */
 
 @Entity
 @DiscriminatorValue(value = "alternative")
-//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "voter_id", "criteria_id", "projectDecision_id" }) } )
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "voteRequest_id", "criteria_id", "projectDecision_id" }) } )
 public class AlternativeComparisonTable extends ComparisonTable {
     
-    @ManyToOne
-    @JoinColumn(name="voter_id", referencedColumnName="id")
-    private User voter;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="voteRequest_id", referencedColumnName="id")
+//    private VoteRequest voteRequest;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName="id")
+    private User user;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="criteria_id", referencedColumnName="id")
     private Criteria criteria;
 
-    public User getVoter() {
-        return voter;
-    }
-
-    public void setVoter(User voter) {
-        this.voter = voter;
-    }
-
+//    public VoteRequest getVoteRequest() {
+//        return voteRequest;
+//    }
+//
+//    public void setVoteRequest(VoteRequest voteRequest) {
+//        this.voteRequest = voteRequest;
+//    }
+    
     public Criteria getCriteria() {
         return criteria;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setCriteria(Criteria criteria) {

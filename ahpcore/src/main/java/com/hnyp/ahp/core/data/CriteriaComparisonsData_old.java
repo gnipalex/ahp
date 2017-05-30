@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hnyp.ahp.lib.Comparison;
 
-public class CriteriaComparisonsData {
+public class CriteriaComparisonsData_old {
 
     private List<String> criteriaNames;
     

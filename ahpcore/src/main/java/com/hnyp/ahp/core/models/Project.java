@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,11 +30,11 @@ public class Project {
     @Column
     private String description;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="owner_id", referencedColumnName="id", nullable=false)
     private User owner;
     
-    @OneToMany(mappedBy="project", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="project", cascade=CascadeType.ALL)
     private List<ProjectDecision> decisions;
 
     public String getName() {

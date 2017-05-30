@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.hnyp.ahp.core.data.CriteriaComparisonsData;
+import com.hnyp.ahp.core.data.CriteriaComparisonsData_old;
 import com.hnyp.ahp.core.models.CriteriaComparison;
 import com.hnyp.ahp.core.models.CriteriaComparisonVersion;
 import com.hnyp.ahp.core.services.CriteriaComparisonService;

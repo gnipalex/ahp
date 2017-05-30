@@ -42,10 +42,9 @@ public class DefaultUserService implements UserService {
     @Override
     public User getCurrentUser() {
         User currentUser = sessionService.getAttribute("currentUser");
-        if (currentUser == null) {
-            throw new IllegalStateException("user is not authenticated");
+        if (currentUser != null) {
+            sessionFactory.getCurrentSession().refresh(currentUser);
         }
-        sessionFactory.getCurrentSession().refresh(currentUser);
         return currentUser;
     }
 

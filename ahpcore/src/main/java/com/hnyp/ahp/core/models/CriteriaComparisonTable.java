@@ -3,8 +3,6 @@ package com.hnyp.ahp.core.models;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 @DiscriminatorValue(value = "criteria")

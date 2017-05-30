@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
     xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -16,15 +14,27 @@
          http://www.springframework.org/schema/util/spring-util.xsd
          http://www.springframework.org/schema/aop
          http://www.springframework.org/schema/aop/spring-aop.xsd">
-      
+
+
+    <bean id="abstractConverter" class="com.hnyp.ahp.core.data.populators.AbstractConverter"
+        abstract="true" />
+
+    <!-- -->
     
-    <bean id="abstractConverter" class="com.hnyp.ahp.core.data.populators.AbstractConverter" abstract="true" />
-    
-    <!--  -->
-    
-    <bean id="projectDataBasicPopulator" class="com.hnyp.ahp.core.data.populators.ProjectDataBasicPopulator" />
-    <bean id="projectDataDecisionsPopulator" class="com.hnyp.ahp.core.data.populators.ProjectDataDecisionsPopulator" />
-    
+    <bean id="userConverter" parent="abstractConverter" >
+        <property name="targetClass" value="com.hnyp.ahp.core.data.UserData" />
+        <property name="populators">
+            <list>
+                <bean class="com.hnyp.ahp.core.data.populators.UserDataPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="projectDataBasicPopulator"
+        class="com.hnyp.ahp.core.data.populators.ProjectDataBasicPopulator" />
+    <bean id="projectDataDecisionsPopulator"
+        class="com.hnyp.ahp.core.data.populators.ProjectDataDecisionsPopulator" />
+
     <bean id="basicProjectDataConverter" parent="abstractConverter">
         <property name="targetClass" value="com.hnyp.ahp.core.data.ProjectData" />
         <property name="populators">
@@ -33,7 +43,7 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="detailsProjectDataConverter" parent="abstractConverter">
         <property name="targetClass" value="com.hnyp.ahp.core.data.ProjectData" />
         <property name="populators">
@@ -43,21 +53,100 @@
             </list>
         </property>
     </bean>
-    
+
     <bean id="basicProjectDataDecisionsConverter" parent="abstractConverter">
-        <property name="targetClass" value="com.hnyp.ahp.core.data.ProjectDecisionData" />
+        <property name="targetClass"
+            value="com.hnyp.ahp.core.data.ProjectDecisionData" />
         <property name="populators">
             <list>
-                <bean class="com.hnyp.ahp.core.data.populators.ProjectDecisionBasicPopulator" />
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ProjectDecisionBasicPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="projectDecisionDataDetailConverter" parent="abstractConverter">
+        <property name="targetClass"
+            value="com.hnyp.ahp.core.data.ProjectDecisionData" />
+        <property name="populators">
+            <list>
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ProjectDecisionBasicPopulator" />
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ProjectDecisionDetailPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="comparableItemConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.core.data.ComparableItemData" />
+        <property name="populators">
+            <list>
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ComparableItemPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="alternativeConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.core.data.AlternativeData" />
+        <property name="populators">
+            <list>
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ComparableItemPopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="criteriaConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.core.data.CriteriaData" />
+        <property name="populators">
+            <list>
+                <bean
+                    class="com.hnyp.ahp.core.data.populators.ComparableItemPopulator" />
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="comparisonTableBasicPopulator"
+        class="com.hnyp.ahp.core.data.populators.ComparisonTableBasicPopulator" />
+    <bean id="comparisonTableComparablesPopulator"
+        class="com.hnyp.ahp.core.data.populators.ComparisonTableComparablesPopulator" />
+    <bean id="comparisonTablePairsPopulator"
+        class="com.hnyp.ahp.core.data.populators.ComparisonTablePairsPopulator" />
+    <bean id="criteriaComparisonTableConverter" parent="abstractConverter">
+        <property name="targetClass"
+            value="com.hnyp.ahp.core.data.CriteriaComparisonTableData" />
+        <property name="populators">
+            <list>
+                <ref bean="comparisonTableBasicPopulator" />
+                <ref bean="comparisonTableComparablesPopulator" />
+                <ref bean="comparisonTablePairsPopulator" />
+                <bean class="com.hnyp.ahp.core.data.populators.CriteriaComparisonTablePopulator" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="alternativeComparisonTableConverter" parent="abstractConverter">
+        <property name="targetClass"
+            value="com.hnyp.ahp.core.data.CriteriaComparisonTableData" />
+        <property name="populators">
+            <list>
+                <ref bean="comparisonTableBasicPopulator" />
+                <ref bean="comparisonTableComparablesPopulator" />
+                <ref bean="comparisonTablePairsPopulator" />
+                <bean class="com.hnyp.ahp.core.data.populators.AlternativeComparisonTablePopulator" />
             </list>
         </property>
     </bean>
     
-    <bean id="projectDecisionDataDetailConverter" parent="abstractConverter">
-        <property name="targetClass" value="com.hnyp.ahp.core.data.ProjectDecisionData" />
+    <bean id="voteRequestConverter" parent="abstractConverter">
+        <property name="targetClass"
+            value="com.hnyp.ahp.core.data.VoteRequestData" />
         <property name="populators">
             <list>
-                <bean class="com.hnyp.ahp.core.data.populators.ProjectDecisionDetailPopulator" />
+                <bean class="com.hnyp.ahp.core.data.populators.VoteRequestPopulator" />
             </list>
         </property>
     </bean>

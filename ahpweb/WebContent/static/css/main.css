@@ -6,6 +6,10 @@
     margin: 0 20px;
 }
 
+.no-padding {
+    padding: 0;
+}
+
 .container {
     background-color: white;
 }

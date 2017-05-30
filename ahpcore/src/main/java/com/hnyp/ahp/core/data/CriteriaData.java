@@ -1,5 +1,5 @@
 package com.hnyp.ahp.core.data;
 
-public class CriteriaData {
-
+public class CriteriaData extends ComparableItemData {
+    
 }

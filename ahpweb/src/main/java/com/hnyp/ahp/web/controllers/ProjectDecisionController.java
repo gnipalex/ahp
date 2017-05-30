@@ -18,7 +18,7 @@ import com.hnyp.ahp.core.facades.ProjectsFacade;
 import com.hnyp.ahp.web.forms.ProjectDecisionForm;
 
 @Controller
-public class ProjectDecisionController {
+public class ProjectDecisionController extends AbstractController {
 
     @Autowired
     private ProjectDecisionFacade projectDecisionFacade;
@@ -27,7 +27,7 @@ public class ProjectDecisionController {
     
     @RequestMapping("/project/{projectId}/decision/{id}")
     public String projectDecision(@PathVariable long id, Model model) {
-        model.addAttribute(projectDecisionFacade.getProjectDecision(id));
+        model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));
         return "projectDecision";
     }
     

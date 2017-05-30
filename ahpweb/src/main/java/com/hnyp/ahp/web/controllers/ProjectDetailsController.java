@@ -10,7 +10,7 @@ import com.hnyp.ahp.core.facades.ProjectsFacade;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectDetailsController {
+public class ProjectDetailsController extends AbstractController {
 
     @Autowired
     private ProjectsFacade projectsFacade;

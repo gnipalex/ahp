@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -29,19 +29,23 @@ public class ComparisonTable {
     @Column(unique = true, nullable = false)
     private long id;
     
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name="comparisonTable_comparableItem", 
         joinColumns = { @JoinColumn(name="comparisonTable_id", nullable=false, updatable=false) },
         inverseJoinColumns = { @JoinColumn(name="comparableItem_id", nullable=false, updatable=false) })
     private List<ComparableItem> comparables;
     
-    @OneToMany(mappedBy="comparisonTable", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="comparisonTable", cascade = CascadeType.ALL)
     private List<ComparisonPair> comparisonPairs;
     
-    @OneToMany(mappedBy = "comparisonTable", cascade = CascadeType.ALL)
-    private List<ComparisonTableResultValue> comparisonResults;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ComparisonResultValue", 
+        joinColumns = { @JoinColumn(name="comparisonTable_id") },
+        inverseJoinColumns = { @JoinColumn(name="id") }
+    )
+    private List<ComparisonResultValue> comparisonResults;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="projectDecision_id", referencedColumnName="id", nullable=false)
     private ProjectDecision projectDecision;
     
@@ -53,6 +57,9 @@ public class ComparisonTable {
     
     @Column
     private double consistencyIndex;
+    
+    @Column
+    private double consistencyRatio;
 
     public List<ComparableItem> getComparables() {
         return comparables;
@@ -86,11 +93,11 @@ public class ComparisonTable {
         this.finished = finished;
     }
 
-    public List<ComparisonTableResultValue> getComparisonResults() {
+    public List<ComparisonResultValue> getComparisonResults() {
         return comparisonResults;
     }
 
-    public void setComparisonResults(List<ComparisonTableResultValue> comparisonResults) {
+    public void setComparisonResults(List<ComparisonResultValue> comparisonResults) {
         this.comparisonResults = comparisonResults;
     }
 
@@ -116,6 +123,14 @@ public class ComparisonTable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public double getConsistencyRatio() {
+        return consistencyRatio;
+    }
+
+    public void setConsistencyRatio(double consistencyRatio) {
+        this.consistencyRatio = consistencyRatio;
     }
     
 }

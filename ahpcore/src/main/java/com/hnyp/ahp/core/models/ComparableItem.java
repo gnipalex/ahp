@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints= { @UniqueConstraint(columnNames= {"name", "projectDecision_id"}) })
+@Table(uniqueConstraints= { @UniqueConstraint(columnNames= {"name", "projectDecision_id", "type"}) })
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
 public abstract class ComparableItem {
@@ -31,7 +32,7 @@ public abstract class ComparableItem {
     @Column
     private String description;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="projectDecision_id", referencedColumnName="id", nullable=false)
     private ProjectDecision projectDecision;
 

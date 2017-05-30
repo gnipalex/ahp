@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="common" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="header" tagdir="/WEB-INF/tags/header" %>
+<%@ taglib prefix="footer" tagdir="/WEB-INF/tags/footer" %>
 
 <%@ attribute name="title" %>
 
@@ -7,29 +8,34 @@
 
 <!DOCTYPE html >
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${title}</title> 
 
-<link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css" />
-<link rel="stylesheet" href="${ctx}/static/css/bootstrap-theme.min.css" />
-<link rel="stylesheet" href="${ctx}/static/css/main.css" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>${title}</title> 
+        
+        <link rel="stylesheet" href="${ctx}/static/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="${ctx}/static/css/bootstrap-theme.min.css" />
+        <link rel="stylesheet" href="${ctx}/static/css/main.css" />
+        
+    </head>
 
-</head>
-
-<body>
-    <common:header />
-    <div class="container m-lr-20-">
-        <jsp:doBody />
+    <body>
+    
+        <header:topNavigation />
         
-        <hr>
+        <div class="container">
+            <header:breadcrumbs />
         
-        <footer>
-            <p>Footer</p>
-        </footer>
+            <jsp:doBody />
+            
+            <hr>
+            
+            <footer:footer />
+        </div>
         
-    </div>
-    <script src="${ctx}/static/js/jquery-3.2.1.min.js"></script>
-    <script src="${ctx}/static/js/bootstrap.min.js"></script>
-    <script src="${ctx}/static/js/main.js"></script>
-</body>
+        <script src="${ctx}/static/js/jquery-3.2.1.min.js"></script>
+        <script src="${ctx}/static/js/bootstrap.min.js"></script>
+        <script src="${ctx}/static/js/main.js"></script>
+    </body>
+    
+</html>

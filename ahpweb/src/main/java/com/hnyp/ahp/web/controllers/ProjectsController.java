@@ -17,7 +17,7 @@ import com.hnyp.ahp.web.forms.ProjectForm;
 
 @Controller
 @RequestMapping("/projects")
-public class ProjectsController {
+public class ProjectsController extends AbstractController {
 
     private static final String PROJECT_FORM = "projectForm";
     

@@ -2,8 +2,10 @@ package com.hnyp.ahp.core.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,24 +22,24 @@ public class ProjectDecision {
     @Column(unique = true, nullable = false)
     private long id;
     
-    @OneToMany(mappedBy = "projectDecision")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectDecision", cascade = CascadeType.ALL)
     private List<VoteRequest> voteRequests;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Alternative", joinColumns = { @JoinColumn(name = "projectDecision_id") }, 
                     inverseJoinColumns = { @JoinColumn(name = "id") } )
     private List<Alternative> alternatives;
     
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "Criteria", joinColumns = { @JoinColumn(name = "projectDecision_id") }, 
                     inverseJoinColumns = { @JoinColumn(name = "id") } )
     private List<Criteria> criterias;
     
-    @OneToMany
-    private List<CriteriaComparisonTable> criteriaComparisonResults;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CriteriaComparisonTable> criteriaComparisonTables;
     
-    @OneToMany
-    private List<AlternativeComparisonTable> alternativeComparisonResults;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AlternativeComparisonTable> alternativeComparisonTables;
     
     @Column
     private String goal;
@@ -45,7 +47,7 @@ public class ProjectDecision {
     @Column
     private String description;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
 
@@ -73,20 +75,20 @@ public class ProjectDecision {
         this.criterias = criterias;
     }
 
-    public List<CriteriaComparisonTable> getCriteriaComparisonResults() {
-        return criteriaComparisonResults;
+    public List<CriteriaComparisonTable> getCriteriaComparisonTables() {
+        return criteriaComparisonTables;
     }
 
-    public void setCriteriaComparisonResults(List<CriteriaComparisonTable> criteriaComparisonResults) {
-        this.criteriaComparisonResults = criteriaComparisonResults;
+    public void setCriteriaComparisonTables(List<CriteriaComparisonTable> criteriaComparisonTables) {
+        this.criteriaComparisonTables = criteriaComparisonTables;
     }
 
-    public List<AlternativeComparisonTable> getAlternativeComparisonResults() {
-        return alternativeComparisonResults;
+    public List<AlternativeComparisonTable> getAlternativeComparisonTables() {
+        return alternativeComparisonTables;
     }
 
-    public void setAlternativeComparisonResults(List<AlternativeComparisonTable> alternativeComparisonResults) {
-        this.alternativeComparisonResults = alternativeComparisonResults;
+    public void setAlternativeComparisonTables(List<AlternativeComparisonTable> alternativeComparisonTables) {
+        this.alternativeComparisonTables = alternativeComparisonTables;
     }
 
     public String getGoal() {

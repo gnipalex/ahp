@@ -43,14 +43,6 @@ public class DefaultProjectsFacade implements ProjectsFacade {
         }
         return Collections.emptyList();
     }
-    
-//    private ProjectData convertBasicInformation(Project project) {
-//        ProjectData projectData = new ProjectData();
-//        projectData.setId(project.getId());
-//        projectData.setName(project.getName());
-//        projectData.setDescription(project.getDescription());
-//        return projectData;
-//    }
 
     @Override
     public void createProject(ProjectData projectForm) {

@@ -10,31 +10,40 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "projectDecision_id", "email" }) })
 public class VoteRequest {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private long id;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="projectDecision_id", referencedColumnName="id", nullable = false)
+    @JoinColumn(name = "projectDecision_id", referencedColumnName = "id", nullable = false)
     private ProjectDecision projectDecision;
-    
-    @Column(nullable=false)
+
+    @Column
+    private String name;
+
+    @Column(nullable = false)
     private String email;
     
-    @Column(unique=true, nullable=false)
+    @Column
+    private String comment;
+
+    @Column(unique = true, nullable = false)
     private String token;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private VoteRequestStatus status;
-    
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "registeredUser_id", referencedColumnName="id")
+    @JoinColumn(name = "registeredUser_id", referencedColumnName = "id")
     private User registeredUser;
 
     public ProjectDecision getProjectDecision() {
@@ -84,5 +93,13 @@ public class VoteRequest {
     public void setId(long id) {
         this.id = id;
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

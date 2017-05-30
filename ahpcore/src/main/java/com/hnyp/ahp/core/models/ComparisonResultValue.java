@@ -12,10 +12,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * Represents calculated weight of comparableItem with respect to comparisonTable
+ *
+ */
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
-public abstract class ComparisonTableResultValue {
+@DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
+public class ComparisonResultValue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,23 +28,11 @@ public abstract class ComparisonTableResultValue {
     private long id;
     
     @ManyToOne
-    @JoinColumn(name="comparisonTable_id", referencedColumnName="id", nullable=false)
-    private ComparisonTable comparisonTable;
-    
-    @ManyToOne
     @JoinColumn(name="comparableItem_id", nullable=false)
     private ComparableItem comparableItem;
     
     @Column
     private double value;
-
-    public ComparisonTable getComparisonTable() {
-        return comparisonTable;
-    }
-
-    public void setComparisonTable(ComparisonTable comparisonTable) {
-        this.comparisonTable = comparisonTable;
-    }
 
     public ComparableItem getComparableItem() {
         return comparableItem;
