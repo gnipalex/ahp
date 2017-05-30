@@ -4,7 +4,7 @@
 
 <c:set var="title">${projectDecisionData.goal} - Project Decision Details</c:set>
 
-<common:pageTemplate title="${title}">
+<common:pageTemplate title="${title}" pageName="EditProjectDecisionPage">
 
     <div class="page-header">
         <h2>Step 1. Edit decision.</h2>

@@ -1,5 +1,10 @@
 module.exports = function(grunt) {
 
+    // Load required modules
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-mkdir');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
     // Project configuration.
     grunt.initConfig({
         mkdir : {
@@ -20,18 +25,22 @@ module.exports = function(grunt) {
                 "separator" : ";"
             },
             "build" : {
-                "src" : [ "build/template.js", "js/pages/*.js" ],
+                "src" : [ "build/template.js", "js/pages/*.js", "js/router.js" ],
                 "dest" : "build/main.js"
             }
+        },
+        copy: {
+          main: {
+            flatten: true,
+            expand: true,
+            src: 'build/main.js',
+            dest: '../../static/js/'
+          }
         }
     });
 
-    // Load required modules
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-mkdir');
-
     // Task definitions
-    grunt.registerTask('default', [ 'mkdir', 'myTemplate', 'concat' ]);
+    grunt.registerTask('default', [ 'mkdir', 'myTemplate', 'concat', 'copy' ]);
 
     grunt.registerMultiTask('myTemplate', 'Custom templating task', function() {
         var fs = require('fs');

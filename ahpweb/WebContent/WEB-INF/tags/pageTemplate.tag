@@ -3,6 +3,7 @@
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/footer" %>
 
 <%@ attribute name="title" %>
+<%@ attribute name="pageName" %>
 
 <c:set var="ctx" value="${pageContext.request.contextPath}" scope="request" />
 
@@ -19,7 +20,7 @@
         
     </head>
 
-    <body>
+    <body data-page-name="${pageName}">
     
         <header:topNavigation />
         
