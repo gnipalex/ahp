@@ -7,7 +7,8 @@ public class ProjectData {
     private long id;
     private String name;
     private String description;
-    private List<ProjectDecisionData> projectDecisions;
+    private List<ProjectDecisionData> decisions;
+    private List<ProjectDecisionData> activeDecisions;
     
     public long getId() {
         return id;
@@ -27,11 +28,17 @@ public class ProjectData {
     public void setDescription(String description) {
         this.description = description;
     }
-    public List<ProjectDecisionData> getProjectDecisions() {
-        return projectDecisions;
+    public List<ProjectDecisionData> getDecisions() {
+        return decisions;
     }
-    public void setProjectDecisions(List<ProjectDecisionData> projectDecisions) {
-        this.projectDecisions = projectDecisions;
+    public void setDecisions(List<ProjectDecisionData> decisions) {
+        this.decisions = decisions;
+    }
+    public List<ProjectDecisionData> getActiveDecisions() {
+        return activeDecisions;
+    }
+    public void setActiveDecisions(List<ProjectDecisionData> activeDecisions) {
+        this.activeDecisions = activeDecisions;
     }
     
 }

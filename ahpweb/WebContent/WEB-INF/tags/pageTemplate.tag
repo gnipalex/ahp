@@ -27,6 +27,8 @@
         <div class="container">
             <header:breadcrumbs />
         
+            <header:messages />
+        
             <jsp:doBody />
             
             <hr>
@@ -36,6 +38,7 @@
         
         <script src="${ctx}/static/js/jquery-3.2.1.min.js"></script>
         <script src="${ctx}/static/js/bootstrap.min.js"></script>
+        <script src="${ctx}/static/js/underscore-min.js"></script>
         <script src="${ctx}/static/js/main.js"></script>
     </body>
     

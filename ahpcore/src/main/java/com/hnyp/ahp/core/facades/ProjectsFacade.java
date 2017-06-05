@@ -10,9 +10,9 @@ public interface ProjectsFacade {
     
     boolean doesProjectExists(String name);
     
-    void createProject(ProjectData projectForm);
+    boolean doesProjectExists(long id);
     
-    ProjectData getProjectDetails(String name);
+    void createProject(ProjectData projectForm);
     
     ProjectData getProjectDetails(long id);
     

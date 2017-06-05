@@ -2,11 +2,14 @@ package com.hnyp.ahp.core.data;
 
 import java.util.List;
 
+import com.hnyp.ahp.core.models.ProjectDecisionStatus;
+
 public class ProjectDecisionData {
 
     private long id;
     private String goal;
     private String description;
+    private ProjectDecisionStatus status;
     private List<CriteriaData> criterias;
     private List<AlternativeData> alternatives;
     private List<VoteRequestData> voteRequests;
@@ -59,4 +62,12 @@ public class ProjectDecisionData {
         this.voteRequests = voteRequests;
     }
 
+    public ProjectDecisionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectDecisionStatus status) {
+        this.status = status;
+    }
+    
 }

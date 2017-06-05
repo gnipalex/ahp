@@ -11,7 +11,7 @@ import com.hnyp.ahp.core.models.ComparisonPair;
 import com.hnyp.ahp.core.models.ComparisonTable;
 import com.hnyp.ahp.lib.ComparisonScale;
 
-public class ComparisonTablePairsPopulator<S extends ComparisonTable, T extends ComparisonTableData> implements Populator<S, T> {
+public class ComparisonTableDataPairsPopulator<S extends ComparisonTable, T extends ComparisonTableData> implements Populator<S, T> {
 
     @Override
     public void populate(S source, T target) {

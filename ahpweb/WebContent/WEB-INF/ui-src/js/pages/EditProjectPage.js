@@ -4,7 +4,7 @@
 		alert('Hi');
 	}
 	
-	global.app.pages.EditProjectPage = {
+	app.pages.EditProjectPage = {
 		render : render
 	};
 	

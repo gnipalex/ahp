@@ -23,12 +23,8 @@ public class DefaultProjectsFacade implements ProjectsFacade {
 
     @Autowired
     private UserService userService;
-    
     @Autowired
     private ProjectService projectService;
-    
-    @Resource
-    private Converter<Project, ProjectData> basicProjectDataConverter;
     @Resource
     private Converter<Project, ProjectData> detailsProjectDataConverter;
     
@@ -37,7 +33,6 @@ public class DefaultProjectsFacade implements ProjectsFacade {
         User currentUser = userService.getCurrentUser();
         List<Project> userProjects = currentUser.getProjects();
         if (CollectionUtils.isNotEmpty(userProjects)) {
-//            return userProjects.stream().map(basicProjectDataConverter::convert)
             return userProjects.stream().map(detailsProjectDataConverter::convert)
                     .collect(Collectors.toList());
         }
@@ -58,15 +53,14 @@ public class DefaultProjectsFacade implements ProjectsFacade {
         return getProjectForCurrentUser(name) != null;
     }
     
+    @Override
+    public boolean doesProjectExists(long id) {
+        return projectService.getProject(id) != null;
+    }
+    
     private Project getProjectForCurrentUser(String name) {
         User currentUser = userService.getCurrentUser();
         return projectService.getProjectByUserAndName(currentUser, name);
-    }
-
-    @Override
-    public ProjectData getProjectDetails(String name) {
-        Project project = getProjectForCurrentUser(name);
-        return detailsProjectDataConverter.convert(project);
     }
 
     @Override

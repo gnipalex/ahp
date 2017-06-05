@@ -14,20 +14,20 @@ import com.hnyp.ahp.core.models.ProjectDecision;
 import com.hnyp.ahp.core.models.VoteRequest;
 import com.hnyp.ahp.core.util.Converters;
 
-public class ProjectDecisionDetailPopulator implements Populator<ProjectDecision, ProjectDecisionData> {
+public class ProjectDecisionDataDetailPopulator implements Populator<ProjectDecision, ProjectDecisionData> {
 
     @Resource
-    private Converter<Alternative, AlternativeData> alternativeConverter;
+    private Converter<Alternative, AlternativeData> alternativeDataConverter;
     @Resource
-    private Converter<Criteria, CriteriaData> criteriaConverter;
+    private Converter<Criteria, CriteriaData> criteriaDataConverter;
     @Resource
-    private Converter<VoteRequest, VoteRequestData> voteRequestConverter;
+    private Converter<VoteRequest, VoteRequestData> voteRequestDataConverter;
     
     @Override
     public void populate(ProjectDecision source, ProjectDecisionData target) {
-        target.setAlternatives(Converters.convertAll(source.getAlternatives(), alternativeConverter));
-        target.setCriterias(Converters.convertAll(source.getCriterias(), criteriaConverter));
-        target.setVoteRequests(Converters.convertAll(source.getVoteRequests(), voteRequestConverter));
+//        target.setAlternatives(Converters.convertAll(source.getAlternatives(), alternativeDataConverter));
+//        target.setCriterias(Converters.convertAll(source.getCriterias(), criteriaDataConverter));
+        target.setVoteRequests(Converters.convertAll(source.getVoteRequests(), voteRequestDataConverter));
     }
     
 }

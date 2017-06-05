@@ -1,10 +1,13 @@
 package com.hnyp.ahp.core.models;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,35 +24,47 @@ public class ProjectDecision {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private long id;
-    
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectDecision", cascade = CascadeType.ALL)
     private List<VoteRequest> voteRequests;
-    
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Alternative", joinColumns = { @JoinColumn(name = "projectDecision_id") }, 
-                    inverseJoinColumns = { @JoinColumn(name = "id") } )
-    private List<Alternative> alternatives;
-    
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "Criteria", joinColumns = { @JoinColumn(name = "projectDecision_id") }, 
-                    inverseJoinColumns = { @JoinColumn(name = "id") } )
-    private List<Criteria> criterias;
-    
+
+    // doesn't work
+    // need to select by query 
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "ComparableItem", joinColumns = { @JoinColumn(name = "projectDecision_id") }, inverseJoinColumns = {
+//            @JoinColumn(name = "id") })
+//    private List<Alternative> alternatives;
+//
+//    @OneToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "ComparableItem", joinColumns = { @JoinColumn(name = "projectDecision_id") }, inverseJoinColumns = {
+//            @JoinColumn(name = "id") })
+//    private List<Criteria> criterias;
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CriteriaComparisonTable> criteriaComparisonTables;
-    
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<AlternativeComparisonTable> alternativeComparisonTables;
-    
+
     @Column
     private String goal;
-    
+
     @Column
     private String description;
-    
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private ProjectDecisionStatus status;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
+
+    @Column
+    private Date createdTS;
+
+    @Column
+    private Date modifiedTS;
 
     public List<VoteRequest> getVoteRequests() {
         return voteRequests;
@@ -59,21 +74,21 @@ public class ProjectDecision {
         this.voteRequests = voteRequests;
     }
 
-    public List<Alternative> getAlternatives() {
-        return alternatives;
-    }
-
-    public void setAlternatives(List<Alternative> alternatives) {
-        this.alternatives = alternatives;
-    }
-
-    public List<Criteria> getCriterias() {
-        return criterias;
-    }
-
-    public void setCriterias(List<Criteria> criterias) {
-        this.criterias = criterias;
-    }
+//    public List<Alternative> getAlternatives() {
+//        return alternatives;
+//    }
+//
+//    public void setAlternatives(List<Alternative> alternatives) {
+//        this.alternatives = alternatives;
+//    }
+//
+//    public List<Criteria> getCriterias() {
+//        return criterias;
+//    }
+//
+//    public void setCriterias(List<Criteria> criterias) {
+//        this.criterias = criterias;
+//    }
 
     public List<CriteriaComparisonTable> getCriteriaComparisonTables() {
         return criteriaComparisonTables;
@@ -122,5 +137,29 @@ public class ProjectDecision {
     public void setId(long id) {
         this.id = id;
     }
-    
+
+    public ProjectDecisionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectDecisionStatus status) {
+        this.status = status;
+    }
+
+    public Date getCreatedTS() {
+        return createdTS;
+    }
+
+    public void setCreatedTS(Date createdTS) {
+        this.createdTS = createdTS;
+    }
+
+    public Date getModifiedTS() {
+        return modifiedTS;
+    }
+
+    public void setModifiedTS(Date modifiedTS) {
+        this.modifiedTS = modifiedTS;
+    }
+
 }

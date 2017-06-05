@@ -1,5 +1,5 @@
 $(function() {
-    var pageName = $(body).data('page-name');
+    var pageName = $('body').data('page-name');
     
     var pageRenderer = app.pages[pageName];
     

@@ -9,7 +9,7 @@
     </a>
     <ul class="dropdown-menu">
         <c:forEach var="project" items="${currentUserProjects}">
-            <li><a href="${ctx}/project/details/${project.id}">${project.name}</a></li>
+            <li><a href="${ctx}/project/${project.id}/details">${project.name}</a></li>
         </c:forEach>
         <li role="separator" class="divider"></li>
         <li><a href="${ctx}/projects">All projects</a></li>

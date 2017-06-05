@@ -6,6 +6,12 @@ public interface ProjectDecisionFacade {
 
     ProjectDecisionData getProjectDecision(long id);
     
+    ProjectDecisionData getProjectDecision(long projectId, long decisionId);
+    
     void createProjectDecision(long projectId, ProjectDecisionData data);
+    
+    void update(ProjectDecisionData projectDecisionData);
+    
+    void remove(long projectDecisionId);
     
 }

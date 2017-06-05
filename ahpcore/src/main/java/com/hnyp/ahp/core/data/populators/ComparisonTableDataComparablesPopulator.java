@@ -13,16 +13,16 @@ import com.hnyp.ahp.core.models.ComparableItem;
 import com.hnyp.ahp.core.models.ComparisonTable;
 import com.hnyp.ahp.core.models.Criteria;
 
-public class ComparisonTableComparablesPopulator<S extends ComparisonTable, T extends ComparisonTableData> implements Populator<S, T> {
+public class ComparisonTableDataComparablesPopulator<S extends ComparisonTable, T extends ComparisonTableData> implements Populator<S, T> {
     
     @Resource
-    private Converter<ComparableItem, ComparableItemData> comparableItemConverter;
+    private Converter<ComparableItem, ComparableItemData> comparableItemDataConverter;
     
     @Override
     public void populate(S source, T target) {
         List<ComparableItemData> convertedComparableItemsDataList = source.getComparables().stream()
 //                .map(Criteria.class::cast)
-                .map(comparableItemConverter::convert)
+                .map(comparableItemDataConverter::convert)
                 .collect(Collectors.toList());
         target.setComparableItems(convertedComparableItemsDataList);
     }

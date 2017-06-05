@@ -1,7 +1,6 @@
 package com.hnyp.ahp.core.data.populators;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -12,19 +11,19 @@ import com.hnyp.ahp.core.data.ProjectDecisionData;
 import com.hnyp.ahp.core.models.Project;
 import com.hnyp.ahp.core.models.ProjectDecision;
 import com.hnyp.ahp.core.services.ProjectDecisionService;
+import com.hnyp.ahp.core.util.Converters;
 
-public class ProjectDataDecisionsPopulator implements Populator<Project, ProjectData> {
+public class ProjectDataActiveDecisionsPopulator implements Populator<Project, ProjectData> {
 
-//    @Resource
-//    private ProjectDecisionService projectDecisionService;
+    @Resource
+    private ProjectDecisionService projectDecisionService;
     @Resource
     private Converter<ProjectDecision, ProjectDecisionData> basicProjectDecisionDataConverter;
     
     @Override
     public void populate(Project source, ProjectData target) {
-        List<ProjectDecisionData> convertedDecisionsDataList = source.getDecisions().stream()
-                .map(basicProjectDecisionDataConverter::convert).collect(Collectors.toList());
-        target.setDecisions(convertedDecisionsDataList);
+        List<ProjectDecision> activeDecisions = projectDecisionService.getActiveDecisions(source);
+        target.setActiveDecisions(Converters.convertAll(activeDecisions, basicProjectDecisionDataConverter));
     }
 
 }

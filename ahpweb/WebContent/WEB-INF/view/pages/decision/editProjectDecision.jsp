@@ -22,7 +22,7 @@
         <span class="glyphicon glyphicon-warning-sign"></span>
         Please take into account that 
         information about project decision can not be 
-        edited when comparison of alternatives is started.
+        edited when comparison of alternatives (voting) is started.
     </p>
 
 </common:pageTemplate>

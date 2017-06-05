@@ -1,6 +1,6 @@
 package com.hnyp.ahp.web.forms;
 
-import javax.validation.constraints.Max;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -9,7 +9,7 @@ public class ProjectDecisionForm {
     @NotBlank(message = "You should provide a goal")
     private String goal;
 
-    @Max(value = 500, message = "Value is too long, please shorten it too be not more than 500 characters")
+    @Size(max = 500, message = "Value is too long, please shorten it too be not more than 500 characters")
     private String description;
 
     private long projectId;

@@ -9,10 +9,10 @@ import com.hnyp.ahp.core.data.VoteRequestData;
 import com.hnyp.ahp.core.models.User;
 import com.hnyp.ahp.core.models.VoteRequest;
 
-public class VoteRequestPopulator implements Populator<VoteRequest, VoteRequestData> {
+public class VoteRequestDataPopulator implements Populator<VoteRequest, VoteRequestData> {
 
     @Resource
-    private Converter<User, UserData> userConverter;
+    private Converter<User, UserData> userDataConverter;
     
     @Override
     public void populate(VoteRequest source, VoteRequestData target) {
@@ -21,7 +21,7 @@ public class VoteRequestPopulator implements Populator<VoteRequest, VoteRequestD
         target.setStatus(source.getStatus());
         target.setToken(source.getToken());
         if (source.getRegisteredUser() != null) {
-            target.setRegisteredUser(userConverter.convert(source.getRegisteredUser()));
+            target.setRegisteredUser(userDataConverter.convert(source.getRegisteredUser()));
         }
     }
 

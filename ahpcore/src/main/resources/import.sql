@@ -19,7 +19,10 @@ insert into user_role(user_id, roles_id) value (1, 1);
 
 insert into project (id, name, description, owner_id) value (1, 'Test Project', 'This is fully test project, created for test user', 1);
 
-insert into projectdecision (id, description, goal, project_id) value (1, 'We want to select some sweets but to be sure that we select the best option among available options', 'Select sweet', 1);
+insert into projectdecision (id, description, goal, project_id, status) value (1, 'We want to select some sweets but to be sure that we select the best option among available options', 'Select sweet', 1, 'CREATED');
+insert into projectdecision (id, description, goal, project_id, status) value (2, 'We have limited budget, but we would like to get some special gadget', 'Select new gadget', 1, 'CREATED');
+insert into projectdecision (id, description, goal, project_id, status) value (3, 'I can''t choose my startup direction', 'Select startup direction', 1, 'CREATED');
+
 
 -- alternatives
 insert into comparableitem (id, name, description, type, projectDecision_id) value (1,'Cookie Maria', 'This is Maria cookie, it can be bought in ATB market, it contains low lewel of sugar, also its cost is low', 'alternative', 1);
@@ -31,7 +34,7 @@ insert into comparableitem (id,name, description, type, projectDecision_id) valu
 insert into comparableitem (id,name, description, type, projectDecision_id) value (5,'Best for children', 'Which one better suits for children, for their health', 'criteria', 1);
 
 -- vote requests
-insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (1, 'test@email.com', '1234#gdgdg#89121', 1, 1, 'CREATED');
+insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (1, 'test@email.com', '1234#gdgdg#89121', 1, 1, 'CONFIRMED');
 insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (2, 'test2@email.com', 'uuu1234#gdgdg#89121', 1, null, 'CREATED');
 
 -- criteria comparison table for Child
