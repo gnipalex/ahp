@@ -6,6 +6,11 @@
 
 <common:pageTemplate title="${title}" pageName="EditProjectDecisionPage">
 
+    <div class="hide" id="edit-project-decision-data-element"
+        data-project-id="${projectId}"
+        data-decision-id="${projectDecisionData.id}"
+    ></div>
+
     <div class="page-header">
         <h2>Step 1. Edit decision.</h2>
     </div>

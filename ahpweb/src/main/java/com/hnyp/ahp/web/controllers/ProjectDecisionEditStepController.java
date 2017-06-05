@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hnyp.ahp.core.data.ProjectDecisionData;
 import com.hnyp.ahp.core.facades.ProjectDecisionFacade;
 import com.hnyp.ahp.web.forms.ProjectDecisionForm;
-import com.hnyp.ahp.web.response.ResponseWraper;
+import com.hnyp.ahp.web.response.AjaxResponseWraper;
 
 @Controller
 @RequestMapping("/project/{projectId}/decision/{id}")
@@ -24,18 +24,18 @@ public class ProjectDecisionEditStepController {
     @Autowired
     private ProjectDecisionFacade projectDecisionFacade;
 
-
     @RequestMapping("/edit")
     public String edit(@PathVariable long id, @PathVariable long projectId, Model model) {
         model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));
+        model.addAttribute("projectId", projectId);
         return "decision/editProjectDecision";
     }
     
     @ResponseBody
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public ResponseWraper<Void> updateBasicInformation(@PathVariable long projectId, @PathVariable long id, @Valid ProjectDecisionForm projectDecisionForm, 
+    public AjaxResponseWraper<Void> updateBasicInformation(@PathVariable long projectId, @PathVariable long id, @Valid ProjectDecisionForm projectDecisionForm, 
             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        ResponseWraper<Void> response = new ResponseWraper<>();
+        AjaxResponseWraper<Void> response = new AjaxResponseWraper<>();
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach(fe -> {
                 response.addErrorMessage(fe.getField(), fe.getDefaultMessage());

@@ -1,27 +1,16 @@
 package com.hnyp.ahp.web.forms;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 public class AlternativeForm {
 
-    private Long projectDecisionId;
-    private Long id;
+    @NotBlank(message = "Please provide value")
+    @Size(max=50, message = "Value should not exceed 50 characters")
     private String name;
+    @Size(max=500, message = "Value should not exceed 500 characters")
     private String description;
-
-    public Long getProjectDecisionId() {
-        return projectDecisionId;
-    }
-
-    public void setProjectDecisionId(Long projectDecisionId) {
-        this.projectDecisionId = projectDecisionId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

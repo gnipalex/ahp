@@ -6,7 +6,7 @@
 
 <div class="panel-group" id="${id}">
     <c:forEach var="decision" items="${decisions}">
-        <div class="panel panel-default">
+        <div class="panel panel-default js-accordion-panel">
           <div class="panel-heading">
                 <p class="panel-title">
                   <strong>

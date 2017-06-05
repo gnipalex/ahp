@@ -13,19 +13,23 @@
     
     <p>Please create criterias you compare alternatives by</p>
     
-    <c:if test="${not empty projectDecision.criterias}">
+    <c:if test="${not empty projectDecisionData.criterias}">
         <ul class="list-group">
-            <c:forEach var="criteria" items="${projectDecision.criterias}">
-                <li class="list-group-item">
-                    <span>${criteria.name}</span>
-                    <span class="pull-right">
-                        <button class="btn btn-xs btn-default js-edit-criteria" title="edit criteria">
-                          <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-xs btn-danger js-remove-criteria" title="remove criteria">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </span>
+            <c:forEach var="criteria" items="${projectDecisionData.criterias}">
+                <li class="list-group-item clearfix">
+                    <div class="col-xs-10 no-padding">
+                        <span>${criteria.name}</span>
+                    </div>
+                    <div class="col-xs-2 no-padding">
+                        <span class="pull-right">
+                            <button class="btn btn-xs btn-default js-edit-criteria" title="edit criteria">
+                              <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-xs btn-danger js-remove-criteria" title="remove criteria">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </span>
+                    </div>
                 </li>
             </c:forEach>
         </ul>

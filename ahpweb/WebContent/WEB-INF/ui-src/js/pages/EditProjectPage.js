@@ -1,11 +1,11 @@
 (function() {
-	
-	function render() {
-		alert('Hi');
-	}
-	
-	app.pages.EditProjectPage = {
-		render : render
-	};
-	
+
+    function render() {
+        alert('Hi');
+    }
+
+    app.pages.EditProjectPage = {
+        render : render
+    };
+
 })();

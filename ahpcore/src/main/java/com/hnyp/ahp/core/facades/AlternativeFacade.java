@@ -14,4 +14,8 @@ public interface AlternativeFacade {
     
     void remove(long alternativeId);
     
+    boolean doesAlternativeExistForProjectDecision(long projectDecisionId, String alternativeName);
+    
+    AlternativeData getAlternativeForDecisionAndName(long projectDecisionId, String alternativeName);
+    
 }

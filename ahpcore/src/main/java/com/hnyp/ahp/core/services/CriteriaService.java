@@ -3,14 +3,10 @@ package com.hnyp.ahp.core.services;
 import java.util.List;
 
 import com.hnyp.ahp.core.models.Criteria;
-import com.hnyp.ahp.core.models.Project;
+import com.hnyp.ahp.core.models.ProjectDecision;
 
 public interface CriteriaService {
     
-    Criteria getById(long id);
+    List<Criteria> getForProjectDecision(ProjectDecision projectDecision);
     
-    List<Criteria> getForProject(Project project);
-    
-    void save(Criteria criteria);
-
 }

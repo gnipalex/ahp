@@ -21,5 +21,7 @@
     <bean id="projectsFacade" class="com.hnyp.ahp.core.facades.impl.DefaultProjectsFacade" />
     
     <bean id="projectDecisionFacade" class="com.hnyp.ahp.core.facades.impl.DefaultProjectDecisionFacade" />
+    
+    <bean id="alternativeFacade" class="com.hnyp.ahp.core.facades.impl.DefaultAlternativeFacade" />
 
 </beans>

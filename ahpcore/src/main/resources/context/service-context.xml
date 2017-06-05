@@ -17,6 +17,8 @@
          http://www.springframework.org/schema/aop
          http://www.springframework.org/schema/aop/spring-aop.xsd">
      
+    <bean id="modelService" class="com.hnyp.ahp.core.services.impl.DefaultModelService" />
+     
     <bean id="userService" class="com.hnyp.ahp.core.services.impl.DefaultUserService" />
     <bean id="roleService" class="com.hnyp.ahp.core.services.impl.DefaultRoleService" />
     <bean id="projectService" class="com.hnyp.ahp.core.services.impl.DefaultProjectService" />
@@ -27,6 +29,9 @@
     
     <bean id="projectDecisionService" class="com.hnyp.ahp.core.services.impl.DefaultProjectDecisionService" />
     
+    <bean id="alternativeService" class="com.hnyp.ahp.core.services.impl.DefaultAlternativeService" />
+    
+    <bean id="criteriaService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaService" />
     <!--  
     <bean id="criteriaComparisonService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaComparisonService" />
     <bean id="criteriaComparisonVersionService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaComparisonVersionService" />

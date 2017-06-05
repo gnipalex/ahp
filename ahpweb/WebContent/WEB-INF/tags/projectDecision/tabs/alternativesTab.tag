@@ -16,11 +16,19 @@
     <c:choose>
         <c:when test="${not empty projectDecisionData.alternatives}">
             <p>List of alternatives</p>
-            <ul class="list-group">
+            <ul class="list-group js-alternative-list">
                 <c:forEach var="alternative" items="${projectDecisionData.alternatives}">
-                    <li class="list-group-item js-alternative" data-id="${alternative.id}"> 
-                        <h4 class="list-group-item-heading js-alternative-name">${alternative.name}</h4>
-                        <p class="list-group-item-text js-alternative-description">${alternative.description}
+                    <li class="list-group-item clearfix js-alternative" 
+                            data-id="${alternative.id}"
+                            data-name="${alternative.name}"
+                            data-description="${alternative.description}"> 
+                        <div class="col-sm-10 no-padding">
+                            <h4 class="list-group-item-heading js-alternative-name">${alternative.name}</h4>
+                            <p class="list-group-item-text js-alternative-description">${alternative.description}
+                                
+                            </p>
+                        </div>
+                        <div class="col-sm-2 no-padding">
                             <span class="pull-right">
                                 <button class="btn btn-xs btn-default js-edit-alternative" title="Edit alternative">
                                     <span class="glyphicon glyphicon-pencil"></span>
@@ -29,7 +37,7 @@
                                     <span class="glyphicon glyphicon-remove" title="Remove alternative"></span>
                                 </button>
                             </span>
-                        </p>
+                        </div>
                     </li>
                 </c:forEach>
             </ul>

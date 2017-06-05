@@ -36,6 +36,12 @@
             <footer:footer />
         </div>
         
+        <script>
+            window.app = window.app || {};
+            window.app.config = window.app.config || {};
+            window.app.config.ctx = '${ctx}';
+        </script>
+        
         <script src="${ctx}/static/js/jquery-3.2.1.min.js"></script>
         <script src="${ctx}/static/js/bootstrap.min.js"></script>
         <script src="${ctx}/static/js/underscore-min.js"></script>

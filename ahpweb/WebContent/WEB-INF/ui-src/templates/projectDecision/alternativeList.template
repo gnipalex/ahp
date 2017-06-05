@@ -1,0 +1,27 @@
+<% var alternatives = it; %>
+
+<ul class="list-group js-alternative-list">
+    <% _.each(alternatives, function(alternative) { %>
+        <li class="list-group-item clearfix js-alternative" 
+            data-id="<%= alternative.id %>"
+            data-name="<%= alternative.name %>"
+            data-description="<%= alternative.description %>"> 
+            <div class="col-sm-10 no-padding">
+                <h4 class="list-group-item-heading js-alternative-name"><%= alternative.name %></h4>
+                <p class="list-group-item-text js-alternative-description"><%= alternative.description %>
+                    
+                </p>
+            </div>
+            <div class="col-sm-2 no-padding">
+                <span class="pull-right">
+                    <button class="btn btn-xs btn-default js-edit-alternative" title="Edit alternative">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-xs btn-danger js-remove-alternative">
+                        <span class="glyphicon glyphicon-remove" title="Remove alternative"></span>
+                    </button>
+                </span>
+            </div>
+        </li>
+    <% }); %>
+</ul>
