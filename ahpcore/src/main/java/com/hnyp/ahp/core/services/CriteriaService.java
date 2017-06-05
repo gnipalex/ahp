@@ -9,4 +9,10 @@ public interface CriteriaService {
     
     List<Criteria> getForProjectDecision(ProjectDecision projectDecision);
     
+    void create(Criteria criteria);
+    
+    void updateCriteria(Criteria criteria);
+    
+    Criteria getForProjectDecisionAndName(ProjectDecision projectDecision, String name);
+    
 }

@@ -24,4 +24,5 @@
     
     <bean id="alternativeFacade" class="com.hnyp.ahp.core.facades.impl.DefaultAlternativeFacade" />
 
+    <bean id="defaultCriteriaFacade" class="com.hnyp.ahp.core.facades.impl.DefaultCriteriaFacade" />
 </beans>

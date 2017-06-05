@@ -40,6 +40,13 @@ public class ProjectDecisionStepsController extends AbstractController {
         return "redirect:" + redirectUrl + suffix;
     }
     
+    @RequestMapping("/edit")
+    public String edit(@PathVariable long id, @PathVariable long projectId, Model model) {
+        model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));
+        model.addAttribute("projectId", projectId);
+        return "decision/editProjectDecision";
+    }
+    
     @RequestMapping("/criteriaComparison")
     public String criteriaComparison(@PathVariable long id, @PathVariable long projectId, Model model) {
         model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));

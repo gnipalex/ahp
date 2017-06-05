@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import com.hnyp.ahp.core.exception.AlternativeAlreadyExistException;
@@ -43,7 +42,6 @@ public class DefaultAlternativeService implements AlternativeService {
         return (Alternative) sessionFactory.getCurrentSession().createCriteria(Alternative.class)
                 .add(Restrictions.eq("projectDecision", projectDecision))
                 .add(Restrictions.eq("name", name))
-                //.setProjection(Projections.id())
                 .uniqueResult();
     }
 

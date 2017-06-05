@@ -1,8 +1,5 @@
-<% // it.title  %>
-<% // it.criteria  %>
-
-<% it.criteria = it.criteria || {}; %>
-<div class="modal fade" id="create-criteria-popup" role="dialog">
+<div class="modal fade" id="create-criteria-popup" role="dialog"
+        data-id="<%= it.id ? it.id : '' %>">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,22 +11,26 @@
         <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="input-criteria-popup-name">Name:</label>
-                <input type="text" name="name" class="form-control" id="input-criteria-popup-name" placeholder="please specify criteria name">
+                <label for="input-criteria-popup-name">Name</label>
+                <input type="text" name="name" class="form-control" id="input-criteria-popup-name" 
+                    value="<%= it.name ? it.name : '' %>"
+                    placeholder="please specify criteria name" />
               </div>
               <div class="form-group">
-                <label for="input-criteria-popup-description">Description:</label>
-                <input type="text" name="description" class="form-control" id="input-criteria-popup-description" placeholder="please specify criteria description">
+                <label for="input-criteria-popup-description">Description</label>
+                <textarea name="description" class="form-control" 
+                    id="input-criteria-popup-description" 
+                    placeholder="please specify alternative description"><%= it.description ? it.description : '' %></textarea>
               </div>
             </form>
         </div>
         <div class="modal-footer">
-              <button id="criteria-popup-save-btn" type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">
-                <span class="glyphicon glyphicon-ok-sign"></span> Save
-              </button>
-              <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">
-                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-              </button>
+            <button id="create-criteria-save-btn" type="submit" class="btn btn-default btn-default pull-left">
+              <span class="glyphicon glyphicon-ok-sign"></span> Save
+            </button>
+            <button type="submit" class="btn btn-default btn-default pull-left" data-dismiss="modal">
+              <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+            </button>
         </div>
       </div>
     </div>

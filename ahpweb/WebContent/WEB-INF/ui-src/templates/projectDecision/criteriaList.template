@@ -1,0 +1,27 @@
+<% var criterias = it; %>
+
+<ul class="list-group js-criteria-list">
+    <% _.each(criterias, function(criteria) { %>
+        <li class="list-group-item clearfix js-criteria" 
+            data-id="<%= criteria.id %>"
+            data-name="<%= criteria.name %>"
+            data-description="<%= criteria.description %>"> 
+            <div class="col-sm-10 no-padding">
+                <h4 class="list-group-item-heading js-criteria-name"><%= criteria.name %></h4>
+                <p class="list-group-item-text js-criteria-description">
+                    <%= criteria.description %>
+                </p>
+            </div>
+            <div class="col-sm-2 no-padding">
+                <span class="pull-right">
+                    <button class="btn btn-xs btn-default js-edit-criteria" title="Edit criteria">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                    <button class="btn btn-xs btn-danger js-remove-criteria">
+                        <span class="glyphicon glyphicon-remove" title="Remove criteria"></span>
+                    </button>
+                </span>
+            </div>
+        </li>
+    <% }); %>
+</ul>

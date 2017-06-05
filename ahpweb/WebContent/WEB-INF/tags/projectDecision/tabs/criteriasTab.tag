@@ -14,11 +14,18 @@
     <p>Please create criterias you compare alternatives by</p>
     
     <c:if test="${not empty projectDecisionData.criterias}">
-        <ul class="list-group">
+        <ul class="list-group js-criteria-list">
             <c:forEach var="criteria" items="${projectDecisionData.criterias}">
-                <li class="list-group-item clearfix">
+                <li class="list-group-item clearfix js-criteria"
+                    data-id="${criteria.id}"
+                    data-name="${criteria.name}"
+                    data-description="${criteria.description}">
+                    
                     <div class="col-xs-10 no-padding">
-                        <span>${criteria.name}</span>
+                        <h4 class="list-group-item-heading js-criteria-name">${ criteria.name }</h4>
+                        <p class="list-group-item-text js-criteria-description">
+                            ${criteria.description}
+                        </p>
                     </div>
                     <div class="col-xs-2 no-padding">
                         <span class="pull-right">
