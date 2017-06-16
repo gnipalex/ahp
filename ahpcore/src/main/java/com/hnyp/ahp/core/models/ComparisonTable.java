@@ -15,7 +15,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -29,19 +28,13 @@ public class ComparisonTable {
     @Column(unique = true, nullable = false)
     private long id;
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name="comparisonTable_comparableItem", 
-        joinColumns = { @JoinColumn(name="comparisonTable_id", nullable=false, updatable=false) },
-        inverseJoinColumns = { @JoinColumn(name="comparableItem_id", nullable=false, updatable=false) })
-    private List<ComparableItem> comparables;
-    
     @OneToMany(fetch = FetchType.LAZY, mappedBy="comparisonTable", cascade = CascadeType.ALL)
     private List<ComparisonPair> comparisonPairs;
     
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ComparisonResultValue", 
+    @JoinTable(name = "ComparisonTable_ComparisonResultValue", 
         joinColumns = { @JoinColumn(name="comparisonTable_id") },
-        inverseJoinColumns = { @JoinColumn(name="id") }
+        inverseJoinColumns = { @JoinColumn(name="comparisonResultValue_id") }
     )
     private List<ComparisonResultValue> comparisonResults;
     
@@ -60,14 +53,9 @@ public class ComparisonTable {
     
     @Column
     private double consistencyRatio;
-
-    public List<ComparableItem> getComparables() {
-        return comparables;
-    }
-
-    public void setComparables(List<ComparableItem> comparables) {
-        this.comparables = comparables;
-    }
+    
+    @Column
+    private boolean consistent;
 
     public List<ComparisonPair> getComparisonPairs() {
         return comparisonPairs;
@@ -131,6 +119,14 @@ public class ComparisonTable {
 
     public void setConsistencyRatio(double consistencyRatio) {
         this.consistencyRatio = consistencyRatio;
+    }
+
+    public boolean isConsistent() {
+        return consistent;
+    }
+
+    public void setConsistent(boolean consistent) {
+        this.consistent = consistent;
     }
     
 }

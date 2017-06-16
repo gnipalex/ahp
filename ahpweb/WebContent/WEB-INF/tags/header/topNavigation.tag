@@ -22,8 +22,11 @@
         <li><a href="#about">About</a></li>
         <s:authorize access="isAuthenticated()">
             <header:projects />
-            <c:if test="${not empty currentUserVoteRequests}">
+            <c:if test="${not empty activeVoteRequests}">
                 <header:voteRequests />
+            </c:if>
+            <c:if test="${not empty activeProjectDecisions}">
+                <header:activeProjectDecisions />
             </c:if>
         </s:authorize>
       </ul>

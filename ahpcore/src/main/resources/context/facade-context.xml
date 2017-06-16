@@ -18,11 +18,19 @@
          http://www.springframework.org/schema/aop/spring-aop.xsd">
     
     <bean id="accountFacade" class="com.hnyp.ahp.core.facades.impl.DefaultAccountFacade" />
+    
     <bean id="projectsFacade" class="com.hnyp.ahp.core.facades.impl.DefaultProjectsFacade" />
     
     <bean id="projectDecisionFacade" class="com.hnyp.ahp.core.facades.impl.DefaultProjectDecisionFacade" />
     
     <bean id="alternativeFacade" class="com.hnyp.ahp.core.facades.impl.DefaultAlternativeFacade" />
 
-    <bean id="defaultCriteriaFacade" class="com.hnyp.ahp.core.facades.impl.DefaultCriteriaFacade" />
+    <bean id="criteriaFacade" class="com.hnyp.ahp.core.facades.impl.DefaultCriteriaFacade" />
+    
+    <bean id="criteriaComparisonFacade" class="com.hnyp.ahp.core.facades.impl.DefaultCriteriaComparisonFacade" />
+    
+    <bean id="alternativeComparisonFacade" class="com.hnyp.ahp.core.facades.impl.DefaultAlternativeComparisonFacade"></bean>
+    
+    <bean id="voteRequestFacade" class="com.hnyp.ahp.core.facades.impl.DefaultVoteRequestFacade" />
+    
 </beans>

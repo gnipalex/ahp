@@ -7,11 +7,11 @@ public class ComparisonTableDataBasicPopulator implements Populator<ComparisonTa
 
     @Override
     public void populate(ComparisonTable source, ComparisonTableData target) {
+        target.setId(source.getId());
         target.setProjectDecisionId(source.getProjectDecision().getId());
         target.setConsistencyRatio(source.getConsistencyRatio());
         target.setFinished(source.isFinished());
-        // TODO this logic should be extracted
-        target.setConsistent(source.getConsistencyRatio() <= 0.1D);
+        target.setConsistent(source.isConsistent());
     }
 
 }

@@ -7,6 +7,7 @@ import com.hnyp.ahp.core.models.ProjectDecisionStatus;
 public class ProjectDecisionData {
 
     private long id;
+    private long projectId;
     private String goal;
     private String description;
     private ProjectDecisionStatus status;
@@ -20,6 +21,14 @@ public class ProjectDecisionData {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public String getGoal() {
@@ -69,5 +78,5 @@ public class ProjectDecisionData {
     public void setStatus(ProjectDecisionStatus status) {
         this.status = status;
     }
-    
+
 }

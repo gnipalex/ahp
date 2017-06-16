@@ -18,14 +18,13 @@
         $alternativeItems.find('.js-edit-alternative').click(function() {
             var $alternativeItem = $(this).closest('.js-alternative');
  
-            var modalContent = app.templates['templates/popup/createAlternative']({
+            var $modal = $(app.templates['templates/popup/createAlternative']({
                 title : 'Update alternative',
                 name : $alternativeItem.data('name'),
                 description : $alternativeItem.data('description'),
                 id : $alternativeItem.data('id')
-            });
-            
-            var $modal = $(modalContent);
+            }));
+
             $modal.on('hidden.bs.modal', function() {
                 $modal.remove();
             });
@@ -40,11 +39,16 @@
             var alternativeId = $alternativeItem.data('id');
             $.post(getUrlPrefix() + '/alternative/' + alternativeId + '/delete')
                 .done(function(response) {
+                    app.components.NotificationArea.clear();
                     if (response.error) {
                         app.components.NotificationArea.showError('Alternative was not removed');
                     } else {
                         app.components.NotificationArea.showSuccess('Alternative was removed');
-                        $alternativeItem.remove();
+                        if ($alternativeItem.siblings().length) {
+                            $alternativeItem.remove();
+                        } else {
+                            refreshAlternativesList(null);
+                        }
                     }
                 });
         });
@@ -61,6 +65,7 @@
         
         $.post(getUrlPrefix() + '/alternative/' + alternativeId, formData)
             .done(function(response) {
+                app.components.NotificationArea.clear();
                 if (response.error) {
                     app.components.NotificationArea.showErrorInModal($modal, 'Alternative was not updated');
                     app.components.FormUtil.displayErrors($informationForm, response.fieldErrorMessages);
@@ -119,10 +124,20 @@
     }
     
     function refreshAlternativesList(alternatives) {
-        var alternativeListContents = app.templates['templates/projectDecision/alternativeList'](alternatives);
-        var $updatedAlternativeList = $(alternativeListContents);
-        var $alternativeList = $('.js-alternative-list').replaceWith($updatedAlternativeList);
-        setAlternativeListHandlers();
+        var $alternativeList = $('.js-alternative-list');
+        var $caption = $('#tab-alternatives').find('.js-alternative-list-caption');
+        
+        if (alternatives && alternatives.length > 0) {
+            var alternativeListContents = app.templates['templates/projectDecision/alternativeList'](alternatives);
+            var $updatedAlternativeList = $(alternativeListContents);
+            $alternativeList.replaceWith($updatedAlternativeList);
+            $caption.text('List of alternatives');
+            setAlternativeListHandlers();
+        } else {
+            $alternativeList.empty();
+            $alternativeList.hide();
+            $caption.text('List of alternatives is empty. Please add some alternative to perform decision from.');
+        }
     }
     
     app.fragments.EditProjectDecisionAlternatives = {

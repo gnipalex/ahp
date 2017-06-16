@@ -17,3 +17,7 @@
 .form-group .error {
     margin-top: 10px;
 }
+
+.js-comparisons-table .dropdown-menu {
+    min-width: auto;
+}

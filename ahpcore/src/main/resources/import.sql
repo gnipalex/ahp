@@ -29,16 +29,17 @@ insert into comparableitem (id, name, description, type, projectDecision_id) val
 insert into comparableitem (id, name, description, type, projectDecision_id) value (2,'Wafles Artek', 'These wafles are tasty, everyone remembers it, it''s crispy and with chocolate, tastes well with a cup of coffee', 'alternative', 1);
 
 -- criterias
-insert into comparableitem (id,name, description, type, projectDecision_id) value (3,'Price', 'How much alternative costs, the less is the better', 'criteria', 1);
-insert into comparableitem (id,name, description, type, projectDecision_id) value (4,'Taste', 'Compare taste of these alternatives', 'criteria', 1);
-insert into comparableitem (id,name, description, type, projectDecision_id) value (5,'Best for children', 'Which one better suits for children, for their health', 'criteria', 1);
+insert into comparableitem (id,name, description, type, minimize, projectDecision_id) value (3,'Price', 'How much alternative costs, the less is the better', 'criteria', true, 1);
+insert into comparableitem (id,name, description, type, minimize, projectDecision_id) value (4,'Taste', 'Compare taste of these alternatives', 'criteria', false, 1);
+insert into comparableitem (id,name, description, type, minimize, projectDecision_id) value (5,'Best for children', 'Which one better suits for children, for their health', 'criteria', false, 1);
 
 -- vote requests
 insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (1, 'test@email.com', '1234#gdgdg#89121', 1, 1, 'CONFIRMED');
 insert into voterequest (id, email, token, projectDecision_id, registeredUser_id, status) value (2, 'test2@email.com', 'uuu1234#gdgdg#89121', 1, null, 'CREATED');
+insert into voterequest (id, email, name, comment, token, projectDecision_id, registeredUser_id, status) value (3, 'ahpweb-11@yopmail.com', 'Oleksandr', 'Hi Alex, please help me to choose', 'qwerty123456-token', 1, null, 'CREATED');
 
 -- criteria comparison table for Child
-insert into comparisontable (id, type, name, description, projectDecision_id) value (1, 'criteria', 'Child', 'How little child treats priorities', 1);
+insert into comparisontable (id, type, name, description, projectDecision_id, calculated, consistencyIndex, consistencyRatio, consistent, finished) value (1, 'criteria', 'Child', 'How little child treats priorities', 1, 0, 0, 0, 0, 0);
 
 insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (1, 'EQUAL', 1, 3, 3);
 insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (2, 'SLIGHTLY_CONCEDE', 1, 3, 4);
@@ -51,7 +52,7 @@ insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) v
 insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (9, 'EQUAL', 1, 5, 5);
 
 -- criteria comparison table for Mother
-insert into comparisontable (id, type, name, description, projectDecision_id) value (2, 'criteria', 'Mother', 'How mother treats priorities', 1);
+insert into comparisontable (id, type, name, description, projectDecision_id, calculated, consistencyIndex, consistencyRatio, consistent, finished) value (2, 'criteria', 'Mother', 'How mother treats priorities', 1, 0, 0, 0, 1, 0);
 
 insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (11, 'EQUAL', 2, 3, 3);
 insert into comparisonpair (id, value, comparisonTable_id, itemA_id, itemB_id) value (12, 'SLIGHTLY_CONCEDE', 2, 3, 4);

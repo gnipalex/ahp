@@ -23,7 +23,8 @@
     <bean id="roleService" class="com.hnyp.ahp.core.services.impl.DefaultRoleService" />
     <bean id="projectService" class="com.hnyp.ahp.core.services.impl.DefaultProjectService" />
     
-    <bean id="sessionService" class="com.hnyp.ahp.core.services.impl.DefaultSessionService">
+    <bean id="sessionService" class="com.hnyp.ahp.core.services.impl.DefaultSessionService" 
+                scope="session">
         <aop:scoped-proxy />
     </bean>
     
@@ -32,11 +33,29 @@
     <bean id="alternativeService" class="com.hnyp.ahp.core.services.impl.DefaultAlternativeService" />
     
     <bean id="criteriaService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaService" />
-    <!--  
+    
     <bean id="criteriaComparisonService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaComparisonService" />
-    <bean id="criteriaComparisonVersionService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaComparisonVersionService" />
-    <bean id="criteriaService" class="com.hnyp.ahp.core.services.impl.DefaultCriteriaService" />
-    <bean id="projectService" class="com.hnyp.ahp.core.services.impl.DefaultProjectService" />
-    -->
+    
+    <bean id="alternativeComparisonService" class="com.hnyp.ahp.core.services.impl.DefaultAlternativeComparisonService" />
+    
+    <bean id="comparisonTableService" class="com.hnyp.ahp.core.services.impl.DefaultComparisonTableService" />
+    
+    <bean id="voteRequestService" class="com.hnyp.ahp.core.services.impl.DefaultVoteRequestService" />
+    
+    <!--  -->
+    
+    <context:property-placeholder location="classpath:email.properties" ignore-unresolvable="true" />
+    <bean id="emailService" class="com.hnyp.ahp.core.services.impl.DefaultEmailService">
+        <property name="username" value="${email.service.username}" />
+        <property name="password" value="${email.service.password}" />
+        <property name="properties">
+            <props>
+                <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+                <prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+                <prop key="mail.smtp.host">${mail.smtp.host}</prop>
+                <prop key="mail.smtp.port">${mail.smtp.port}</prop>
+            </props>
+        </property>
+    </bean>
      
 </beans>

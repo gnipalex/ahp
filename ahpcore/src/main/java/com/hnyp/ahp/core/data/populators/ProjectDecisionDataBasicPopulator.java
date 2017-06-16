@@ -8,6 +8,7 @@ public class ProjectDecisionDataBasicPopulator implements Populator<ProjectDecis
     @Override
     public void populate(ProjectDecision source, ProjectDecisionData target) {
         target.setId(source.getId());
+        target.setProjectId(source.getProject().getId());
         target.setGoal(source.getGoal());
         target.setDescription(source.getDescription());
         target.setStatus(source.getStatus());

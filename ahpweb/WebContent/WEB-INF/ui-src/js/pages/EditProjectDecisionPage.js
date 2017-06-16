@@ -1,31 +1,41 @@
 (function() {
 
-    var $informationForm;
-    
+    var projectId,
+        projectDecisionId;
+   
     function render() {
-        $informationForm = $('#project-decision-info-form');
-        $informationForm.submit(onUpdateBasicInformation);
+        projectId = $('#edit-project-decision-data-element').data('project-id');
+        projectDecisionId = $('#edit-project-decision-data-element').data('decision-id');
         
+        app.fragments.EditProjectDecisionBasicInformation.render();
         app.fragments.EditProjectDecisionAlternatives.render();
         app.fragments.EditProjectDecisionCriterias.render();
+        // edit experts (voters)
+        
+        $('#edit-decision-next-step-btn').click(showNextStepPopup);
+
     }
     
-    function onUpdateBasicInformation(e) {
-        e.preventDefault();
+    function showNextStepPopup() {
+        var $modal = $(app.templates['templates/popup/editDecisionNextStep']());
         
-        app.components.NotificationArea.clear();
-        app.components.FormUtil.resetErrors($informationForm);
+        $modal.on('hidden.bs.modal', function() {
+            $modal.remove();
+        });
         
-        var formData = $informationForm.serialize();
-        $.post(window.location.href, formData)
-            .done(function(response) {
-                if (response.error) {
-                    app.components.NotificationArea.showError('Basic information was not updated due to errors');
-                    app.components.FormUtil.displayErrors($informationForm, response.fieldErrorMessages);
-                } else {
-                    app.components.NotificationArea.showSuccess('Information updated');
-                }
-            });
+        $modal.find('#confirm-btn').click(function() {
+            var postForm = $('<form>')
+                .attr('method', 'post')
+                .attr('action', getUrlPrefix() + '/finishEdit')
+                .appendTo($('body'));
+            postForm.submit();
+        });
+       
+        $modal.modal();
+    }
+    
+    function getUrlPrefix() {
+        return app.config.ctx + '/project/' + projectId + '/decision/' + projectDecisionId;
     }
 
     app.pages.EditProjectDecisionPage = {

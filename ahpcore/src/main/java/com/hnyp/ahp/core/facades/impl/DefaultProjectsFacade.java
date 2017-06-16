@@ -12,14 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
 import com.hnyp.ahp.core.data.ProjectData;
-import com.hnyp.ahp.core.facades.ProjectsFacade;
+import com.hnyp.ahp.core.facades.ProjectFacade;
 import com.hnyp.ahp.core.models.Project;
 import com.hnyp.ahp.core.models.User;
 import com.hnyp.ahp.core.services.ProjectService;
 import com.hnyp.ahp.core.services.UserService;
 
 @Transactional
-public class DefaultProjectsFacade implements ProjectsFacade {
+public class DefaultProjectsFacade implements ProjectFacade {
 
     @Autowired
     private UserService userService;

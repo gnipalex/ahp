@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hnyp.ahp.core.data.ProjectData;
 
-public interface ProjectsFacade {
+public interface ProjectFacade {
 
     List<ProjectData> getUserProjects();
     

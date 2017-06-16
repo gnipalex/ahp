@@ -11,48 +11,70 @@ public class VoteRequestData {
     private String token;
     private VoteRequestStatus status;
     private UserData registeredUser;
-    
+    private ProjectDecisionData projectDecision;
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
+
     public String getToken() {
         return token;
     }
+
     public void setToken(String token) {
         this.token = token;
     }
+
     public VoteRequestStatus getStatus() {
         return status;
     }
+
     public void setStatus(VoteRequestStatus status) {
         this.status = status;
     }
+
     public UserData getRegisteredUser() {
         return registeredUser;
     }
+
     public void setRegisteredUser(UserData registeredUser) {
         this.registeredUser = registeredUser;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getComment() {
         return comment;
     }
+
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
+
+    public ProjectDecisionData getProjectDecision() {
+        return projectDecision;
+    }
+
+    public void setProjectDecision(ProjectDecisionData projectDecision) {
+        this.projectDecision = projectDecision;
+    }
+
 }

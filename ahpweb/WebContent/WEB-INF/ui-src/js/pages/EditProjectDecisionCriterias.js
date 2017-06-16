@@ -40,11 +40,16 @@
             var criteriaId = $criteriaItem.data('id');
             $.post(getUrlPrefix() + '/criteria/' + criteriaId + '/delete')
                 .done(function(response) {
+                    app.components.NotificationArea.clear();
                     if (response.error) {
                         app.components.NotificationArea.showError('Criteria was not removed');
                     } else {
                         app.components.NotificationArea.showSuccess('Criteria was removed');
-                        $criteriaItem.remove();
+                        if ($criteriaItem.siblings().length) {
+                            $criteriaItem.remove();
+                        } else {
+                            refreshCriteriasList(null);
+                        }
                     }
                 });
         });
@@ -61,6 +66,7 @@
         
         $.post(getUrlPrefix() + '/criteria/' + criteriaId, formData)
             .done(function(response) {
+                app.components.NotificationArea.clear();
                 if (response.error) {
                     app.components.NotificationArea.showErrorInModal($modal, 'Criteria was not updated');
                     app.components.FormUtil.displayErrors($informationForm, response.fieldErrorMessages);
@@ -71,7 +77,6 @@
                     $modal.modal('hide');
                 }
             });
-        
     }
     
     function onAddCriteriaClick() {
@@ -119,11 +124,19 @@
     }
     
     function refreshCriteriasList(criterias) {
-        var criteriaListContents = app.templates['templates/projectDecision/criteriaList'](criterias);
-        var $updatedCriteriaList = $(criteriaListContents);
-        // doesn't work when no element on page
-        var $criteriaList = $('.js-criteria-list').replaceWith($updatedCriteriaList);
-        setCriteriaListHandlers();
+        var $criteriaList = $('.js-criteria-list');
+        var $caption = $('#tab-criterias').find('.js-criteria-list-caption');
+
+        if (criterias && criterias.length) {
+            var criteriaListContents = app.templates['templates/projectDecision/criteriaList'](criterias);
+            var $updatedCriteriaList = $(criteriaListContents);
+            $criteriaList.replaceWith($updatedCriteriaList);
+            $caption.text('List of criterias');
+            setCriteriaListHandlers();
+        } else {
+            $criteriaList.empty().hide();
+            $caption.text('List of criterias is empty. Please add some criteria to compare criteria by');
+        }
     }
 
     app.fragments.EditProjectDecisionCriterias = {

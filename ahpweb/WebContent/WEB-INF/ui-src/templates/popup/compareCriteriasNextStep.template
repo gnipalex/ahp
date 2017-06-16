@@ -1,0 +1,28 @@
+<div class="modal fade" id="compare-criterias-next-step-popup" role="dialog" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="js-criteria-comparison-popup-title">
+                Finish compare criterias
+              </h4>
+        </div>
+        <div class="modal-body">
+            <p>You have finished editing information about decision. 
+            Next steps are to send voting requests to all experts specified in prev step, so that voting is started.
+            Please note that you will not be able to alter information about project decision. 
+            Please make sure that provided criteria comparisons are consistent, 
+            it is important because inconsistency at current stage may lead to incorrect decision priorities.
+            </p>
+        </div>
+        <div class="modal-footer">
+              <button id="confirm-btn" type="submit" class="btn btn-default pull-left" >
+                <span class="glyphicon glyphicon-ok"></span> Yes, proceed
+              </button>
+              <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">
+                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+              </button>
+        </div>
+      </div>
+    </div>
+</div>

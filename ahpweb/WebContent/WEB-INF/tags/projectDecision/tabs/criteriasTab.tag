@@ -11,10 +11,10 @@
     
     <br/>
     
-    <p>Please create criterias you compare alternatives by</p>
-    
-    <c:if test="${not empty projectDecisionData.criterias}">
-        <ul class="list-group js-criteria-list">
+    <c:choose>
+        <c:when test="${not empty projectDecisionData.criterias}">
+            <p class="js-criteria-list-caption">List of criterias</p>
+            <ul class="list-group js-criteria-list">
             <c:forEach var="criteria" items="${projectDecisionData.criterias}">
                 <li class="list-group-item clearfix js-criteria"
                     data-id="${criteria.id}"
@@ -39,9 +39,14 @@
                     </div>
                 </li>
             </c:forEach>
-        </ul>
-    </c:if>
-    
+            </ul>
+        </c:when>
+        <c:otherwise>
+            <p class="js-criteria-list-caption">Please create criterias you compare alternatives by</p>
+            <ul class="list-group js-criteria-list hide"></ul>
+        </c:otherwise>
+    </c:choose>
+
     <p>
         <button class="btn btn-default js-add-criteria">
           <span class="glyphicon glyphicon-plus"></span> Add criteria

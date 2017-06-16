@@ -11,6 +11,12 @@ public class Comparison {
 
     public Comparison() {}
 
+    public Comparison(String alternativeA, String alternativeB, ComparisonScale value) {
+        this.alternativeA = alternativeA;
+        this.alternativeB = alternativeB;
+        this.value = value;
+    }
+    
     public Comparison(Comparison original) {
         this.alternativeA = original.alternativeA;
         this.alternativeB = original.alternativeB;

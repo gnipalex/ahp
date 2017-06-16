@@ -1,5 +1,8 @@
 package com.hnyp.ahp.web.controllers;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hnyp.ahp.core.data.ProjectData;
-import com.hnyp.ahp.core.facades.ProjectsFacade;
+import com.hnyp.ahp.core.facades.ProjectFacade;
+import com.hnyp.ahp.web.breadcrumb.Breadcrumb;
 import com.hnyp.ahp.web.forms.ProjectForm;
 
 @Controller
@@ -22,7 +26,16 @@ public class ProjectsController extends AbstractController {
     private static final String PROJECT_FORM = "projectForm";
     
     @Autowired
-    private ProjectsFacade projectsFacade;
+    private ProjectFacade projectsFacade;
+    
+    
+    @ModelAttribute("breadcrumbs")
+    public List<Breadcrumb> getBreadcrums() {
+        return Arrays.asList(
+             new Breadcrumb().setTitle("Home Page").setUrl("/"),
+             new Breadcrumb().setTitle("Projects").setUrl("/projects")
+        );
+    }
     
     @RequestMapping
     public String projects(Model model) {

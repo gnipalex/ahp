@@ -4,11 +4,14 @@
 
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-        Vote requests <span class="label label-default">${currentUserVoteRequests.size()}</span>
+        Vote requests <span class="label label-default">${activeVoteRequests.size()}</span>
     </a>
     <ul class="dropdown-menu">
-        <c:forEach var="voteRequest" items="${currentUserVoteRequests}">
-            <li><a href="${ctx}/projectDecision/${voteRequest.projectDecision.Id}">${voteRequest.projectDecision.goal}</a></li>
+        <c:forEach var="voteRequest" items="${activeVoteRequests}">
+            <li>
+            <a href="${ctx}/voteRequest/${voteRequest.id}">
+                ${not empty voteRequest.projectDecision.goal ? voteRequest.projectDecision.goal : 'empty goal'}</a>
+            </li>
         </c:forEach>
     </ul>
 </li>

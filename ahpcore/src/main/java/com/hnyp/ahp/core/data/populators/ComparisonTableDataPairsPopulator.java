@@ -5,23 +5,37 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
+import org.springframework.core.convert.converter.Converter;
+
+import com.hnyp.ahp.core.data.ComparisonPairData;
 import com.hnyp.ahp.core.data.ComparisonTableData;
 import com.hnyp.ahp.core.models.ComparableItem;
 import com.hnyp.ahp.core.models.ComparisonPair;
 import com.hnyp.ahp.core.models.ComparisonTable;
-import com.hnyp.ahp.lib.ComparisonScale;
+import com.hnyp.ahp.core.services.ComparisonTableService;
 
 public class ComparisonTableDataPairsPopulator<S extends ComparisonTable, T extends ComparisonTableData> implements Populator<S, T> {
 
+    @Resource
+    private ComparisonTableService comparisonTableService;
+    
+    @Resource
+    private Converter<ComparisonPair, ComparisonPairData> comparisonPairDataConverter;
+    
     @Override
     public void populate(S source, T target) {
         Map<String, Map<String, List<ComparisonPair>>> comparisonPairsGrouped = source.getComparisonPairs().stream()
                 .collect(Collectors.groupingBy(cp -> cp.getItemA().getName(), 
                             Collectors.groupingBy(cp -> cp.getItemB().getName()))
                  );
-        List<String> comparisonItemNames = source.getComparables().stream().map(ComparableItem::getName).collect(Collectors.toList());
+        
+        List<ComparableItem> comparableItems = comparisonTableService.getComparableItems(source);
+        
+        List<String> comparisonItemNames = comparableItems.stream().map(ComparableItem::getName).collect(Collectors.toList());
         if (isStructureValid(comparisonPairsGrouped, comparisonItemNames)) {
-            Map<String, Map<String, ComparisonScale>> convertedTable = convertComparisonTable(comparisonPairsGrouped, comparisonItemNames);
+            Map<String, Map<String, ComparisonPairData>> convertedTable = convertComparisonTable(comparisonPairsGrouped, comparisonItemNames);
             target.setComparisonTable(convertedTable);
             target.setStructureValid(true);
         } else {
@@ -29,14 +43,14 @@ public class ComparisonTableDataPairsPopulator<S extends ComparisonTable, T exte
         }
     }
     
-    private Map<String, Map<String, ComparisonScale>> convertComparisonTable(Map<String, Map<String, 
+    private Map<String, Map<String, ComparisonPairData>> convertComparisonTable(Map<String, Map<String, 
             List<ComparisonPair>>> comparisonPairsGrouped, List<String> comparisonItemNames) {
-        Map<String, Map<String, ComparisonScale>> convertedTable = new LinkedHashMap<>();
+        Map<String, Map<String, ComparisonPairData>> convertedTable = new LinkedHashMap<>();
         comparisonItemNames.stream().forEach(rowName -> {
-            Map<String, ComparisonScale> convertedRow = new LinkedHashMap<>();
+            Map<String, ComparisonPairData> convertedRow = new LinkedHashMap<>();
             comparisonItemNames.stream().forEach(columnName -> {
                 ComparisonPair pair = comparisonPairsGrouped.get(rowName).get(columnName).get(0);
-                convertedRow.put(columnName, pair.getValue());
+                convertedRow.put(columnName, comparisonPairDataConverter.convert(pair));
             });
             convertedTable.put(rowName, convertedRow);
         });

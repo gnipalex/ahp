@@ -108,6 +108,15 @@
             </list>
         </property>
     </bean>
+    
+    <bean id="comparisonPairDataConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.core.data.ComparisonPairData" />
+        <property name="populators">
+            <list>
+                <bean class="com.hnyp.ahp.core.data.populators.ComparisonPairDataPopulator" />
+            </list>
+        </property>
+    </bean>
 
     <bean id="comparisonTableDataBasicPopulator"
         class="com.hnyp.ahp.core.data.populators.ComparisonTableDataBasicPopulator" />
@@ -115,6 +124,7 @@
         class="com.hnyp.ahp.core.data.populators.ComparisonTableDataComparablesPopulator" />
     <bean id="comparisonTableDataPairsPopulator"
         class="com.hnyp.ahp.core.data.populators.ComparisonTableDataPairsPopulator" />
+        
     <bean id="criteriaComparisonTableDataConverter" parent="abstractConverter">
         <property name="targetClass" value="com.hnyp.ahp.core.data.CriteriaComparisonTableData" />
         <property name="populators">
@@ -128,7 +138,7 @@
     </bean>
 
     <bean id="alternativeComparisonTableDataConverter" parent="abstractConverter">
-        <property name="targetClass" value="com.hnyp.ahp.core.data.CriteriaComparisonTableData" />
+        <property name="targetClass" value="com.hnyp.ahp.core.data.AlternativeComparisonTableData" />
         <property name="populators">
             <list>
                 <ref bean="comparisonTableDataBasicPopulator" />
@@ -144,6 +154,16 @@
         <property name="populators">
             <list>
                 <bean class="com.hnyp.ahp.core.data.populators.VoteRequestDataPopulator" />
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="voteRequestWithDecisionDataConverter" parent="abstractConverter">
+        <property name="targetClass" value="com.hnyp.ahp.core.data.VoteRequestData" />
+        <property name="populators">
+            <list>
+                <bean class="com.hnyp.ahp.core.data.populators.VoteRequestDataPopulator" />
+                <bean class="com.hnyp.ahp.core.data.populators.VoteRequestDataDecisionPopulator" />
             </list>
         </property>
     </bean>

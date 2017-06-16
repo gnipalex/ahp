@@ -18,7 +18,7 @@ import javax.persistence.OneToMany;
  * also weighted by criteria comparison results
  *
  */
-@Entity
+//@Entity
 public class WeightedAlternativeComparisonResult {
 
     @Id

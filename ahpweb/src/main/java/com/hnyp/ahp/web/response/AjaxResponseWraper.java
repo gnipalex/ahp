@@ -10,6 +10,12 @@ public class AjaxResponseWraper<T> {
     private String errorMessage;
     private Map<String, String> fieldErrorMessages = new HashMap<>();
 
+    public static <T> AjaxResponseWraper<T> wrap(T data) {
+        AjaxResponseWraper<T> response = new AjaxResponseWraper<>();
+        response.setData(data);
+        return response;
+    }
+    
     public AjaxResponseWraper<T> addErrorMessage(String field, String errorMessage) {
         fieldErrorMessages.put(field, errorMessage);
         return this;

@@ -32,6 +32,7 @@ module.exports = function(grunt) {
                     "build/template.js", 
                     "js/pages/*.js", 
                     "js/components/*.js",
+                    "js/objects/*.js",
                     "js/router.js" 
                  ],
                 "dest" : "build/main.js"

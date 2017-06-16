@@ -66,7 +66,7 @@ public class ProjectDecisionEditCriteriaRestController {
             CriteriaData criteriaData = new CriteriaData();
             criteriaData.setDescription(criteriaForm.getDescription());
             criteriaData.setName(criteriaForm.getName());
-            criteriaData.setId(criteriaForm.getId());
+            criteriaData.setId(criteriaId);
             
             criteriaFacade.update(criteriaData);
             

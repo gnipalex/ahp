@@ -1,6 +1,5 @@
 package com.hnyp.ahp.core.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.hnyp.ahp.lib.ComparisonScale;
 
@@ -27,14 +29,17 @@ public class ComparisonPair {
     private long id;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="comparisonTable_id", referencedColumnName="id", nullable=false)
     private ComparisonTable comparisonTable;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="itemA_id", referencedColumnName="id", nullable=false)
     private ComparableItem itemA;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="itemB_id", referencedColumnName="id", nullable=false)
     private ComparableItem itemB;
     

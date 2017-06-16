@@ -8,15 +8,23 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.hnyp.ahp.core.data.ProjectData;
-import com.hnyp.ahp.core.facades.ProjectsFacade;
+import com.hnyp.ahp.core.data.ProjectDecisionData;
+import com.hnyp.ahp.core.data.VoteRequestData;
+import com.hnyp.ahp.core.facades.ProjectDecisionFacade;
+import com.hnyp.ahp.core.facades.ProjectFacade;
+import com.hnyp.ahp.core.facades.VoteRequestFacade;
 import com.hnyp.ahp.core.services.UserService;
 
 public class AbstractController {
 
     @Resource
-    private ProjectsFacade projectsFacade;
+    private ProjectFacade projectsFacade;
     @Resource
     private UserService userService;
+    @Resource
+    private VoteRequestFacade voteRequestFacade;
+    
+//    private ProjectDecisionFacade
     
     @ModelAttribute("currentUserProjects")
     public List<ProjectData> getUserProjects() {
@@ -25,5 +33,20 @@ public class AbstractController {
         }
         return Collections.emptyList();
     }
+    
+    @ModelAttribute("activeVoteRequests")
+    public List<VoteRequestData> getActiveVoteRequests() {
+        if (userService.getCurrentUser() != null) {
+            return voteRequestFacade.getActiveRequests();
+        }
+        return Collections.emptyList();
+    }
+    
+//    @ModelAttribute("activeProjectDecisions")
+//    public List<ProjectDecisionData> getActiveProjectDecisions() {
+//        if (userService.getCurrentUser() != null) {
+//            return 
+//        }
+//    }
     
 }

@@ -8,11 +8,15 @@
 
     <div class="hide" id="edit-project-decision-data-element"
         data-project-id="${projectId}"
-        data-decision-id="${projectDecisionData.id}"
-    ></div>
+        data-decision-id="${projectDecisionData.id}">
+   </div>
 
     <div class="page-header">
-        <h2>Step 1. Edit decision.</h2>
+        <h2>Step 1. Edit decision.
+        <span class="pull-right">
+            <button class="btn btn-primary" id="edit-decision-next-step-btn">Next Step <span class="glyphicon glyphicon-chevron-right"></span></button>
+        </span>
+        </h2>
     </div>
     
     <div class="row">

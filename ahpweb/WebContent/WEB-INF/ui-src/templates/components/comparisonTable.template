@@ -1,0 +1,89 @@
+<% 
+
+var comparableItemNames = it.comparisonsData.comparableItems.map(function(e) {
+    return e.name;
+});  
+
+%>
+
+
+<table class="table table-bordered js-comparisons-table">
+    <caption>Pairwise comparisons</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <% _.each(comparableItemNames, function(itemName) { %>
+                <th class="text-center">
+                    <%= itemName %>
+                </th>
+            <% }); %> 
+        </tr>
+    </thead>
+    <tbody>
+
+        <% _.each(it.comparisonsData.comparisonTable, function(comparisonsRow, rowItemName) { %>
+             
+            <tr>
+                <th class="text-center">
+                    <%= rowItemName %>
+                </th>
+
+                <% _.each(comparisonsRow, function(comparisonPair, columnItemName) { %>
+                
+                    <td class="text-center">
+                        <div class="dropdown js-alternative-dropdown"
+                                    data-value="<%= comparisonPair.value %>"
+                                    data-alternative-a="<%= rowItemName %>"
+                                    data-alternative-b="<%= columnItemName %>"
+                                    data-id="<%= comparisonPair.id %>" >
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >
+                                <span>
+                                    <%= app.localization.comparisonTable.scale[comparisonPair.value] %>
+                                </span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                  <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#" data-value="EXTREME_FAVORS">
+                                        <%= app.localization.comparisonTable.scale.EXTREME_FAVORS %>
+                                    </a>
+                                  </li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="VERY_STRONGLY_FAVORS">
+                                        <%= app.localization.comparisonTable.scale.VERY_STRONGLY_FAVORS %>
+                                        </a></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="STRONGLY_FAVORS">
+                                        <%= app.localization.comparisonTable.scale.STRONGLY_FAVORS %>
+                                        </a></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="SLIGHTLY_FAVORS">
+                                        <%= app.localization.comparisonTable.scale.SLIGHTLY_FAVORS %>
+                                        </a></li>
+                                  <li role="presentation" class="divider"></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="EQUAL">
+                                        <%= app.localization.comparisonTable.scale.EQUAL %>
+                                        </a></li>
+                                  <li role="presentation" class="divider"></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="SLIGHTLY_CONCEDE">
+                                        <%= app.localization.comparisonTable.scale.SLIGHTLY_CONCEDE %>
+                                        </a></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="STRONGLY_CONCEDE">
+                                      <%= app.localization.comparisonTable.scale.STRONGLY_CONCEDE %>
+                                      </a></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="VERY_STRONGLY_CONCEDE">
+                                      <%= app.localization.comparisonTable.scale.VERY_STRONGLY_CONCEDE %>
+                                      </a></li>
+                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#" data-value="EXTREME_CONCEDE">
+                                      <%= app.localization.comparisonTable.scale.EXTREME_CONCEDE %>
+                                      </a></li>
+                            </ul>
+                        </div>
+                    </td>
+                    
+                <% }); %>
+            
+            </tr>
+              
+             
+        <% });  %>
+
+    </tbody>
+</table>

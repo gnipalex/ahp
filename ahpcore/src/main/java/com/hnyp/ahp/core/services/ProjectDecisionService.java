@@ -11,6 +11,10 @@ public interface ProjectDecisionService {
     
     void save(ProjectDecision projectDecision);
     
+    void startProjectDecision(ProjectDecision projectDecision);
+    
+    void finishEditProjectDecision(ProjectDecision projectDecision);
+    
     void remove(long id);
     
     List<ProjectDecision> getActiveDecisions(Project project);

@@ -15,7 +15,7 @@
     
     <c:choose>
         <c:when test="${not empty projectDecisionData.alternatives}">
-            <p>List of alternatives</p>
+            <p class="js-alternative-list-caption">List of alternatives</p>
             <ul class="list-group js-alternative-list">
                 <c:forEach var="alternative" items="${projectDecisionData.alternatives}">
                     <li class="list-group-item clearfix js-alternative" 
@@ -24,8 +24,8 @@
                             data-description="${alternative.description}"> 
                         <div class="col-sm-10 no-padding">
                             <h4 class="list-group-item-heading js-alternative-name">${alternative.name}</h4>
-                            <p class="list-group-item-text js-alternative-description">${alternative.description}
-                                
+                            <p class="list-group-item-text js-alternative-description">
+                                ${alternative.description}
                             </p>
                         </div>
                         <div class="col-sm-2 no-padding">
@@ -43,7 +43,8 @@
             </ul>
         </c:when>
         <c:otherwise>
-            <p>List of alternatives is empty. Please add some alternative to perform decision from.</p>
+            <p class="js-alternative-list-caption">List of alternatives is empty. Please add some alternative to perform decision from.</p>
+            <ul class="list-group js-alternative-list hide"></ul>
         </c:otherwise>
     </c:choose>
     
