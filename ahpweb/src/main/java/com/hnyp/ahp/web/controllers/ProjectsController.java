@@ -40,7 +40,7 @@ public class ProjectsController extends AbstractController {
     @RequestMapping
     public String projects(Model model) {
         model.addAttribute("projects", projectsFacade.getUserProjects());
-        return "projects";
+        return "project/projects";
     }
     
     @ModelAttribute(PROJECT_FORM)
@@ -50,7 +50,7 @@ public class ProjectsController extends AbstractController {
     
     @RequestMapping("/create")
     public String createProject() {
-        return "createProject";
+        return "project/createProject";
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST)

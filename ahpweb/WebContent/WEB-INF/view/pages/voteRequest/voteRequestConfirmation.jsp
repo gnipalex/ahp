@@ -15,19 +15,22 @@
     <div class="row">
         <div class="col-sm-8">
             <p>You've been requested to provide your understanding in project decision</p>
-            <p>Comment from decision owner:</p>
-            <blockquote>
-                <p>${voteRequestData.comment}</p>
-            </blockquote>
+            
+            <c:if test="${not empty voteRequestData.comment }">
+                <p>Comment from decision owner:</p>
+                <blockquote>
+                    <p>${voteRequestData.comment}</p>
+                </blockquote>
+            </c:if>
             
             <p>Please find more details about decision below:</p>
             <compareAlternatives:information />
             
             <p>
-                <form action="${ctx}/" method="post">
+                <form class="form-inline" action="${ctx}/voteRequest/${voteRequestData.id}/accept" method="post">
                     <button class="btn btn-primary">Accept and proceed</button>
                 </form>
-                <form action="" method="post">
+                <form class="form-inline" action="${ctx}/voteRequest/${voteRequestData.id}/deny" method="post">
                     <button class="btn btn-default">Deny</button>
                 </form>
             </p>

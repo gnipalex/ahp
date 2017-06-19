@@ -6,9 +6,11 @@ import java.util.Optional;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
+import com.hnyp.ahp.core.exception.EmailSendException;
 import com.hnyp.ahp.core.exception.VoteRequestAccessException;
 import com.hnyp.ahp.core.models.Project;
 import com.hnyp.ahp.core.models.ProjectDecision;
@@ -23,6 +25,8 @@ import com.hnyp.ahp.core.services.data.EmailMessage;
 
 public class DefaultVoteRequestService implements VoteRequestService {
 
+    private static final Logger LOG = Logger.getLogger(DefaultVoteRequestService.class);
+    
     @Resource
     private UserService userService;
     @Resource
@@ -33,7 +37,7 @@ public class DefaultVoteRequestService implements VoteRequestService {
     private SessionFactory sessionFactory;
     
     @Override
-    public void sendVoteRequestsForDecision(ProjectDecision decision) {
+    public void processRequestsForDecision(ProjectDecision decision) {
         List<VoteRequest> voteRequests = decision.getVoteRequests();
         if (CollectionUtils.isNotEmpty(voteRequests)) {
             voteRequests.forEach(this::processVoteRequest);
@@ -46,7 +50,6 @@ public class DefaultVoteRequestService implements VoteRequestService {
             voteRequest.setRegisteredUser(user);
         }
         sendEmail(voteRequest);
-        voteRequest.setStatus(VoteRequestStatus.SENT);
         modelService.save(voteRequest);
     }
     
@@ -56,7 +59,13 @@ public class DefaultVoteRequestService implements VoteRequestService {
         message.setSender("noreply@dssahp");
         message.setSubject(String.format("DSS AHP : Vote Request"));
         message.setBody(getMessageBody(request));
-        emailService.sendEmail(message);
+        try {
+            emailService.sendEmail(message);
+            request.setStatus(VoteRequestStatus.SENT);
+        } catch (EmailSendException e) {
+            request.setStatus(VoteRequestStatus.SENDING_ERROR);
+            LOG.error(e);
+        }
     }
     
     // TODO use velocity templating
@@ -102,7 +111,7 @@ public class DefaultVoteRequestService implements VoteRequestService {
     @Override
     public List<VoteRequest> getActiveVoteRequests(User user) {
         return sessionFactory.getCurrentSession().createCriteria(VoteRequest.class)
-                .add(Restrictions.in("status", new Object[] {VoteRequestStatus.CONFIRMED, VoteRequestStatus.CREATED, VoteRequestStatus.SENT}))
+                .add(Restrictions.in("status", new Object[] {VoteRequestStatus.SENT}))
                 .add(Restrictions.eq("registeredUser", user))
                 .list();
     }

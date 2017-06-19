@@ -1,0 +1,25 @@
+
+<div id="criteria-tab-<%= it.criteria.id %>" data-comparison-id="<%= it.id %>"
+            class="tab-pane fade js-alternative-tab">
+    <h3><%= it.criteria.name %></h3>
+    <p><strong>Criteria description:</strong>
+        <%= it.criteria.description %>
+    </p>
+    <div class="comparison-edit">
+      <div class="comparison-table">
+          <!-- comparison table placeholder -->
+      </div>
+      <p>
+        <button class="btn btn-default js-update-comparison" disabled="disabled">Update comparison</button>
+      </p>
+      <p>Alternative comparison result:</p>
+      <div class="comparison-result">
+          <dl class="dl-horizontal">
+              <dt>Is consistent</dt>
+              <dd class="js-is-consistent"><%= it.consistent ? "Yes" : "No" %></dd>
+              <dt>Consistency ratio</dt>
+              <dd class="js-consistency-ratio"><%= it.consistencyRatio %></dd>
+          </dl>
+      </div>
+    </div>
+</div>

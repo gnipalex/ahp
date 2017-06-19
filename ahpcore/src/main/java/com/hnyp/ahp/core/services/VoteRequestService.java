@@ -8,7 +8,7 @@ import com.hnyp.ahp.core.models.VoteRequest;
 
 public interface VoteRequestService {
 
-    void sendVoteRequestsForDecision(ProjectDecision decision);
+    void processRequestsForDecision(ProjectDecision decision);
     
     VoteRequest getById(long id);
     

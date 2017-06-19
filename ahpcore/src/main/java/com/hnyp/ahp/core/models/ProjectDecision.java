@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,24 +26,6 @@ public class ProjectDecision {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "projectDecision", cascade = CascadeType.ALL)
     private List<VoteRequest> voteRequests;
-
-    // doesn't work
-    // need to select by query 
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "ComparableItem", joinColumns = { @JoinColumn(name = "projectDecision_id") }, inverseJoinColumns = {
-//            @JoinColumn(name = "id") })
-//    private List<Alternative> alternatives;
-//
-//    @OneToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "ComparableItem", joinColumns = { @JoinColumn(name = "projectDecision_id") }, inverseJoinColumns = {
-//            @JoinColumn(name = "id") })
-//    private List<Criteria> criterias;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<CriteriaComparisonTable> criteriaComparisonTables;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<AlternativeComparisonTable> alternativeComparisonTables;
 
     @Column
     private String goal;
@@ -72,38 +53,6 @@ public class ProjectDecision {
 
     public void setVoteRequests(List<VoteRequest> voteRequests) {
         this.voteRequests = voteRequests;
-    }
-
-//    public List<Alternative> getAlternatives() {
-//        return alternatives;
-//    }
-//
-//    public void setAlternatives(List<Alternative> alternatives) {
-//        this.alternatives = alternatives;
-//    }
-//
-//    public List<Criteria> getCriterias() {
-//        return criterias;
-//    }
-//
-//    public void setCriterias(List<Criteria> criterias) {
-//        this.criterias = criterias;
-//    }
-
-    public List<CriteriaComparisonTable> getCriteriaComparisonTables() {
-        return criteriaComparisonTables;
-    }
-
-    public void setCriteriaComparisonTables(List<CriteriaComparisonTable> criteriaComparisonTables) {
-        this.criteriaComparisonTables = criteriaComparisonTables;
-    }
-
-    public List<AlternativeComparisonTable> getAlternativeComparisonTables() {
-        return alternativeComparisonTables;
-    }
-
-    public void setAlternativeComparisonTables(List<AlternativeComparisonTable> alternativeComparisonTables) {
-        this.alternativeComparisonTables = alternativeComparisonTables;
     }
 
     public String getGoal() {

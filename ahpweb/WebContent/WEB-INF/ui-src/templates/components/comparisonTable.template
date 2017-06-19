@@ -29,14 +29,18 @@ var comparableItemNames = it.comparisonsData.comparableItems.map(function(e) {
                 </th>
 
                 <% _.each(comparisonsRow, function(comparisonPair, columnItemName) { %>
-                
+                    <% var disabledDropDownAttribute = rowItemName === columnItemName ? "disabled=\"true\"" : ""; %>
                     <td class="text-center">
                         <div class="dropdown js-alternative-dropdown"
                                     data-value="<%= comparisonPair.value %>"
                                     data-alternative-a="<%= rowItemName %>"
                                     data-alternative-b="<%= columnItemName %>"
-                                    data-id="<%= comparisonPair.id %>" >
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" >
+                                    data-id="<%= comparisonPair.id %>" 
+                                    >
+                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" 
+                                <%= disabledDropDownAttribute %>
+                                <%= disabledDropDownAttribute ? "title='Can not modify this element because it is self comparison, element is always equal to itself'" : "" %>
+                                >
                                 <span>
                                     <%= app.localization.comparisonTable.scale[comparisonPair.value] %>
                                 </span>

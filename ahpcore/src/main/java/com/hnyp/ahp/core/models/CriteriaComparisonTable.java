@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 //@Table(uniqueConstraints = { @UniqueConstraint(columnNames={"name", "projectDecision_id"}) })
 public class CriteriaComparisonTable extends ComparisonTable {
 
-    @Column(nullable=false)
+    @Column
     private String name;
     
     @Column

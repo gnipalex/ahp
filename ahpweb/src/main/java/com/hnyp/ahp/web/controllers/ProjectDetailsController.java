@@ -37,7 +37,7 @@ public class ProjectDetailsController extends AbstractController {
                 new Breadcrumb().setTitle(projectData.getName())
         ));
         
-        return "projectDetails";
+        return "project/projectDetails";
     }
     
 }

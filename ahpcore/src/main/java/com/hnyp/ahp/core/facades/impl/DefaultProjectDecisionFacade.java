@@ -133,6 +133,4 @@ public class DefaultProjectDecisionFacade implements ProjectDecisionFacade {
         projectDecisionService.finishEditProjectDecision(projectDecision);
     }
     
-    
-    
 }

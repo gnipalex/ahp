@@ -1,5 +1,6 @@
 package com.hnyp.ahp.web.controllers;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import com.hnyp.ahp.core.data.ProjectDecisionData;
 import com.hnyp.ahp.core.data.ProjectDecisionEditStatusData;
 import com.hnyp.ahp.core.facades.ProjectDecisionFacade;
 import com.hnyp.ahp.core.models.ProjectDecisionStatus;
+import com.hnyp.ahp.web.breadcrumb.Breadcrumb;
 
 @Controller
 @RequestMapping("/project/{projectId}/decision/{id}")
@@ -88,19 +90,28 @@ public class ProjectDecisionStepsController extends AbstractController {
     @RequestMapping(value = "/finishCriteriaComparison", method = RequestMethod.POST)
     public String finishCriteriaComparison(@PathVariable long id, @PathVariable long projectId, Model model) {
         projectDecisionFacade.startProjectDecision(id);
-        return String.format("/project/%s/decision/%s/voting", projectId, id);
+        return "redirect:" + String.format("/project/%s/decision/%s/voting", projectId, id);
     }
     
     @RequestMapping("/voting")
     public String voting(@PathVariable long id, @PathVariable long projectId, Model model) {
         model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));
-        return "decision/voting";
+        return "voting/votingProcess";
     }
     
     @RequestMapping("/decide")
     public String decide(@PathVariable long id, @PathVariable long projectId, Model model) {
         model.addAttribute("projectDecisionData", projectDecisionFacade.getProjectDecision(id));
-        return "decision/voting";
+        model.addAttribute("breadcrumbs", Arrays.asList(
+                        new Breadcrumb().setTitle("Home Page").setUrl("/"),
+                        new Breadcrumb().setTitle("Projects").setUrl("/projects"),
+                        new Breadcrumb().setTitle("Gadget").setUrl("/"),
+                        new Breadcrumb().setTitle("#Add new feature").setUrl("/")
+                ));
+        
+        
+        
+        return "decision/projectDecisionResults";
     }
     
 }

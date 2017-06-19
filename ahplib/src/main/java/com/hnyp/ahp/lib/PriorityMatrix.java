@@ -3,6 +3,8 @@ package com.hnyp.ahp.lib;
 
 import org.apache.commons.math3.linear.*;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class PriorityMatrix {
@@ -99,7 +101,8 @@ public class PriorityMatrix {
     }
 
     private double getConsistencyIndex(double eigenValue, int matrixDimentsion) {
-        return (eigenValue - matrixDimentsion) / (matrixDimentsion - 1);
+        double consistencyIndex = (eigenValue - matrixDimentsion) / (matrixDimentsion - 1);
+        return BigDecimal.valueOf(consistencyIndex).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public double getConsistencyIndex() {
@@ -120,7 +123,11 @@ public class PriorityMatrix {
     }
 
     public double getConsistencyRatio() {
-        return consistencyIndex / getRandomIndex();
+        if (consistencyIndex > 0) {
+            return consistencyIndex / getRandomIndex();
+        } else {
+            return 0D;
+        }
     }
 
     public static void main(String[] args) {

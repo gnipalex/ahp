@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hnyp.ahp.core.data.ProjectDecisionData;
@@ -17,6 +18,7 @@ import com.hnyp.ahp.core.facades.ProjectFacade;
 import com.hnyp.ahp.core.facades.VoteRequestFacade;
 
 @Controller
+@RequestMapping("/voteRequest")
 public class VoteRequestDetailsController {
 
     @Resource
@@ -26,7 +28,7 @@ public class VoteRequestDetailsController {
     @Resource
     private VoteRequestFacade voteRequestFacade;
     
-    @RequestMapping("/voteRequest/{id}")
+    @RequestMapping("/{id}")
     public String getInformationPage(@PathVariable long id, Model model) {
 //        ProjectData projectData = projectFacade.getProjectDetails(projectId);
         VoteRequestData voteRequestData = voteRequestFacade.getById(id);
@@ -37,7 +39,7 @@ public class VoteRequestDetailsController {
         return "voteRequest/voteRequestConfirmation";
     }
     
-    @RequestMapping("/voteRequest/{id}/accept")
+    @RequestMapping(value = "/{id}/accept", method = RequestMethod.POST)
     public String acceptRequest(@PathVariable long id) {
         voteRequestFacade.accept(id);
         VoteRequestData voteRequestData = voteRequestFacade.getById(id);
@@ -47,7 +49,7 @@ public class VoteRequestDetailsController {
                 projectDecisionData.getId() );
     }
     
-    @RequestMapping("/voteRequest/{id}/deny")
+    @RequestMapping(value = "/{id}/deny", method = RequestMethod.POST)
     public String denyRequest(@PathVariable long id, RedirectAttributes redirectAttributes) {
         voteRequestFacade.deny(id);
         redirectAttributes.addFlashAttribute("successMessage", "Request denied");

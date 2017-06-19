@@ -13,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Required;
 
+import com.hnyp.ahp.core.exception.EmailSendException;
 import com.hnyp.ahp.core.services.EmailService;
 import com.hnyp.ahp.core.services.data.EmailMessage;
 
@@ -29,7 +30,7 @@ public class DefaultEmailService implements EmailService {
             Message message = createMessage(emailMessage, session);
             Transport.send(message);
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new EmailSendException("error when sending email", e);
         }
     }
 

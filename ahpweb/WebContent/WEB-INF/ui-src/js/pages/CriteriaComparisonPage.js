@@ -22,7 +22,11 @@
         });
         
         $modal.find('#confirm-btn').click(function() {
-            
+            $('<form>')
+                .attr('method', 'post')
+                .attr('action', getUrlPrefix() + '/finishCriteriaComparison')
+                .appendTo($('body'))
+                .submit();
         });
         
         $modal.modal();

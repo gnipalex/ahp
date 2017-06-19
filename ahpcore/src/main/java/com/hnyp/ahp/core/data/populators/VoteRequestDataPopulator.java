@@ -18,6 +18,7 @@ public class VoteRequestDataPopulator implements Populator<VoteRequest, VoteRequ
     public void populate(VoteRequest source, VoteRequestData target) {
         target.setName(source.getName());
         target.setEmail(source.getEmail());
+        target.setComment(source.getComment());
         target.setId(source.getId());
         target.setStatus(source.getStatus());
         target.setToken(source.getToken());

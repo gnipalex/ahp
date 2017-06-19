@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.hnyp.ahp.core.exception.ProjectDecisionIllegalStateException;
 import com.hnyp.ahp.core.models.Alternative;
 import com.hnyp.ahp.core.models.Criteria;
+import com.hnyp.ahp.core.models.CriteriaComparisonTable;
 import com.hnyp.ahp.core.models.Project;
 import com.hnyp.ahp.core.models.ProjectDecision;
 import com.hnyp.ahp.core.models.ProjectDecisionStatus;
 import com.hnyp.ahp.core.models.VoteRequest;
 import com.hnyp.ahp.core.services.AlternativeService;
+import com.hnyp.ahp.core.services.CriteriaComparisonService;
 import com.hnyp.ahp.core.services.CriteriaService;
 import com.hnyp.ahp.core.services.ProjectDecisionService;
 import com.hnyp.ahp.core.services.VoteRequestService;
@@ -32,6 +34,8 @@ public class DefaultProjectDecisionService implements ProjectDecisionService {
     private SessionFactory sessionFactory;
     @Autowired
     private CriteriaService criteriaService;
+    @Autowired
+    private CriteriaComparisonService criteriaComparisonService;
     @Autowired
     private AlternativeService alternativeService;
     @Autowired
@@ -78,14 +82,15 @@ public class DefaultProjectDecisionService implements ProjectDecisionService {
 
     @Override
     public void startProjectDecision(ProjectDecision projectDecision) {
-        if (!ProjectDecisionStatus.CREATED.equals(projectDecision.getStatus()) ||
+        if (!ProjectDecisionStatus.CREATED.equals(projectDecision.getStatus()) &&
                 !ProjectDecisionStatus.CRITERIA_COMPARISON.equals(projectDecision.getStatus())) {
             throw new ProjectDecisionIllegalStateException(String.format("project decision %s can not be started, "
                     + "its status is %s", projectDecision.getId(), projectDecision.getStatus()));
         }
         
-        if (CollectionUtils.isEmpty(projectDecision.getCriteriaComparisonTables())) {
-            throw new IllegalStateException(String.format("project decision %s can not be started, "
+        List<CriteriaComparisonTable> criteriaComparisonTables = criteriaComparisonService.getForDecision(projectDecision);
+        if (CollectionUtils.isEmpty(criteriaComparisonTables)) {
+            throw new ProjectDecisionIllegalStateException(String.format("project decision %s can not be started, "
                     + "it doesn't contain at least one criteria comparison", projectDecision.getId()));
         }
 
@@ -93,7 +98,7 @@ public class DefaultProjectDecisionService implements ProjectDecisionService {
         
         projectDecision.setStatus(ProjectDecisionStatus.VOTING);
         
-        voteRequestService.sendVoteRequestsForDecision(projectDecision);
+        voteRequestService.processRequestsForDecision(projectDecision);
         
         save(projectDecision);
     }
